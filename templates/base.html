@@ -1,0 +1,52 @@
+{{define "head"}}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{.Title}}</title>
+<meta name="description" content="{{.Desc}}">
+<link rel="canonical" href="{{.URL}}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{.Title}}">
+<meta property="og:description" content="{{.Desc}}">
+<meta property="og:url" content="{{.URL}}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>⌘</text></svg>">
+</head>
+<body>
+<header class="topbar">
+  <a class="mark" href="/">{{.Site.Name}}</a>
+  <nav>
+    <a href="/#work">Work</a>
+    <a href="/#services">Services</a>
+    <a href="/#contact" class="nav-cta">Hire me</a>
+  </nav>
+</header>
+{{end}}
+
+{{define "cta"}}
+<section class="cta" id="contact">
+  <h2>Have something that needs to work in production?</h2>
+  <p class="cta-sub">{{if .Site.Available}}{{.Site.AvailabilityNote}}{{else}}Currently at capacity — still happy to talk about future work.{{end}}</p>
+  <div class="btn-row">
+    {{with mailto .Site.Contact}}<a class="btn btn-primary" href="{{.}}">Email me</a>{{end}}
+    {{with waLink .Site.Contact}}<a class="btn" href="{{.}}" rel="noopener">WhatsApp</a>{{end}}
+    {{with .Site.Contact.ChatDemo}}<a class="btn btn-ghost" href="{{.}}" rel="noopener">{{$.Site.Contact.ChatDemoLabel}} &rarr;</a>{{end}}
+  </div>
+  <p class="cta-fine">Scope calls are free. I reply within one business day.</p>
+</section>
+{{end}}
+
+{{define "footer"}}
+<footer class="foot">
+  <div>&copy; {{.Site.Name}} · {{.Site.Role}}</div>
+  <div class="foot-links">
+    {{with .Site.Contact.GitHub}}<a href="{{.}}" rel="noopener">GitHub</a>{{end}}
+    {{with .Site.Contact.LinkedIn}}<a href="{{.}}" rel="noopener">LinkedIn</a>{{end}}
+    {{with .Site.Contact.Email}}<a href="mailto:{{.}}">{{.}}</a>{{end}}
+  </div>
+</footer>
+</body>
+</html>
+{{end}}

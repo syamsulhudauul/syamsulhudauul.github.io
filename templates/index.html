@@ -1,0 +1,79 @@
+{{template "head" .}}
+
+<main>
+<section class="hero">
+  {{if .Site.Available}}<p class="badge"><span class="dot"></span>{{.Site.AvailabilityNote}}</p>{{end}}
+  <h1>{{.Site.Tagline}}</h1>
+  <p class="lede">{{.Site.Intro}}</p>
+  <div class="btn-row">
+    {{with mailto .Site.Contact}}<a class="btn btn-primary" href="{{.}}">Start a project</a>{{end}}
+    {{with waLink .Site.Contact}}<a class="btn" href="{{.}}" rel="noopener">WhatsApp</a>{{end}}
+    {{with .Site.Contact.ChatDemo}}<a class="btn btn-ghost" href="{{.}}" rel="noopener">{{$.Site.Contact.ChatDemoLabel}} &rarr;</a>{{end}}
+  </div>
+  {{with .Site.Proof}}
+  <dl class="proof">
+    {{range .}}<div><dt>{{.Value}}</dt><dd>{{.Label}}</dd></div>{{end}}
+  </dl>
+  {{end}}
+</section>
+
+<section id="work">
+  <h2 class="sec-title">Selected work</h2>
+  <p class="sec-sub">Real systems, real constraints. Client names withheld where under NDA.</p>
+  <div class="cards">
+    {{range .Works}}
+    <a class="card" href="{{.URL}}">
+      <div class="card-top">
+        {{with .Client}}<span class="card-client">{{.}}</span>{{end}}
+        {{with .Period}}<span class="card-period">{{.}}</span>{{end}}
+      </div>
+      <h3>{{.Title}}</h3>
+      <p>{{.Summary}}</p>
+      {{with .Metrics}}
+      <ul class="card-metrics">
+        {{range .}}<li><b>{{.Value}}</b> {{.Label}}</li>{{end}}
+      </ul>
+      {{end}}
+      {{with .Tags}}<ul class="tags">{{range .}}<li>{{.}}</li>{{end}}</ul>{{end}}
+      <span class="card-more">Read the case study &rarr;</span>
+    </a>
+    {{else}}
+    <p class="empty">No case studies yet. Add one in <code>content/work/</code>.</p>
+    {{end}}
+  </div>
+</section>
+
+<section id="services">
+  <h2 class="sec-title">What I do</h2>
+  <p class="sec-sub">Fixed scope, fixed price, written proposal before any code.</p>
+  <div class="services">
+    {{range .Site.Services}}
+    <article class="service">
+      <h3>{{.Title}}</h3>
+      <p>{{.Body}}</p>
+      {{with .Deliverables}}<p class="deliver"><span>Deliverable</span> {{.}}</p>{{end}}
+    </article>
+    {{end}}
+  </div>
+</section>
+
+{{with .Site.Process}}
+<section id="process">
+  <h2 class="sec-title">How working together goes</h2>
+  <ol class="process">
+    {{range .}}<li><h3>{{.Title}}</h3><p>{{.Body}}</p></li>{{end}}
+  </ol>
+</section>
+{{end}}
+
+{{with .Site.Stack}}
+<section id="stack">
+  <h2 class="sec-title">Stack</h2>
+  <ul class="tags tags-lg">{{range .}}<li>{{.}}</li>{{end}}</ul>
+</section>
+{{end}}
+
+{{template "cta" .}}
+</main>
+
+{{template "footer" .}}

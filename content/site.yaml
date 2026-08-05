@@ -1,0 +1,78 @@
+# Every piece of copy on the site comes from this file plus content/work/*.md.
+# Edit here, run `make build`, push. Nothing else to touch.
+
+name: Syamsul Huda
+handle: syamsulhudauul
+role: Applied AI Engineer
+tagline: I ship AI systems that survive production traffic.
+intro: >-
+  Backend and applied-AI engineer. I build RAG pipelines, LLM agents, and the Go
+  services underneath them — for products serving millions of users, not demos.
+  Available for freelance and contract work.
+
+available: true
+availability_note: Taking on 1–2 freelance projects · remote · GMT+7
+
+base_url: https://syamsulhudauul.github.io
+
+contact:
+  email: syamsulhudauul.dev@gmail.com
+  # TODO: set your number in full international format, digits only (e.g. 6281234567890).
+  # Leave empty to hide the WhatsApp button.
+  whatsapp: ""
+  whatsapp_message: "Hi Syamsul — saw your portfolio, I'd like to discuss a project."
+  github: https://github.com/syamsulhudauul
+  linkedin: ""
+  # Interactive demo — the AI agent grounded in your own work history.
+  chat_demo: ""
+  chat_demo_label: Ask my AI agent about my work
+
+services:
+  - title: LLM agents & RAG systems
+    body: >-
+      Retrieval pipelines, tool-calling agents, evaluation harnesses. Hybrid search,
+      reranking, prompt architecture, and the observability to know when it regresses.
+    deliverables: Working system + eval suite + runbook
+  - title: Go backend & API engineering
+    body: >-
+      gRPC and HTTP services, event pipelines, Postgres/pgvector, Docker deploys.
+      Built for the p99, not the happy path.
+    deliverables: Production service + tests + CI
+  - title: AI feature rescue
+    body: >-
+      An LLM feature that works in the notebook and falls over in prod. I find why —
+      latency, cost, hallucination, or retrieval — and fix it.
+    deliverables: Diagnosis report + shipped fix
+
+stack:
+  - Go
+  - Python
+  - TypeScript / Next.js
+  - PostgreSQL / pgvector
+  - Qdrant
+  - gRPC
+  - LiteLLM
+  - MCP
+  - Docker
+  - Kubernetes
+  - Datadog
+  - FastAPI
+
+# Shown under the hero as hard proof. Keep to 3 — more reads as noise.
+proof:
+  - value: "10M+"
+    label: users served by systems I build on
+  - value: "5 yrs"
+    label: backend & applied AI
+  - value: "p95 < 1s"
+    label: typical LLM endpoint target
+
+process:
+  - title: Scope call
+    body: 30 minutes. What breaks, what success looks like, whether I'm the right fit. Free.
+  - title: Fixed-scope proposal
+    body: Written scope, deliverables, price, and timeline. No hourly surprises.
+  - title: Build in the open
+    body: Weekly demo, shared repo, you can read every commit as it lands.
+  - title: Handover
+    body: Runbook, tests, and a walkthrough so your team owns it without me.

@@ -1,0 +1,8 @@
+dist/
+.DS_Store
+.playwright-mcp/
+*.png
+*.log
+.env
+.env.*
+!.env.example

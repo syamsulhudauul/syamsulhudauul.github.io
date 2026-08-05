@@ -1,0 +1,51 @@
+{{template "head" .}}
+{{with .Work}}
+<main class="narrow">
+<article>
+  <a class="back" href="/#work">&larr; All work</a>
+  <header class="case-head">
+    <div class="card-top">
+      {{with .Client}}<span class="card-client">{{.}}</span>{{end}}
+      {{with .Period}}<span class="card-period">{{.}}</span>{{end}}
+    </div>
+    <h1>{{.Title}}</h1>
+    <p class="lede">{{.Summary}}</p>
+    {{with .Role}}<p class="case-role">Role: {{.}}</p>{{end}}
+    {{with .Tags}}<ul class="tags">{{range .}}<li>{{.}}</li>{{end}}</ul>{{end}}
+    {{if or .Repo .Live}}
+    <div class="btn-row btn-row-sm">
+      {{with .Repo}}<a class="btn btn-ghost" href="{{.}}" rel="noopener">Source</a>{{end}}
+      {{with .Live}}<a class="btn btn-ghost" href="{{.}}" rel="noopener">Live</a>{{end}}
+    </div>
+    {{end}}
+  </header>
+
+  {{with .Metrics}}
+  <dl class="metrics">
+    {{range .}}<div><dt>{{.Value}}</dt><dd>{{.Label}}{{with .Note}}<span>{{.}}</span>{{end}}</dd></div>{{end}}
+  </dl>
+  {{end}}
+
+  <div class="prose">{{.Body}}</div>
+</article>
+
+{{$rest := others $.Works .}}
+{{with $rest}}
+<section class="more-work">
+  <h2 class="sec-title">More work</h2>
+  <div class="cards cards-sm">
+    {{range .}}
+    <a class="card" href="{{.URL}}">
+      <h3>{{.Title}}</h3>
+      <p>{{.Summary}}</p>
+      <span class="card-more">Read &rarr;</span>
+    </a>
+    {{end}}
+  </div>
+</section>
+{{end}}
+
+{{template "cta" $}}
+</main>
+{{end}}
+{{template "footer" .}}
