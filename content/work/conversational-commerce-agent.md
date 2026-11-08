@@ -11,12 +11,13 @@ summary: >-
 tags: [Go, gRPC, MCP, LLM tool-calling, SSE, Redis, PostgreSQL]
 featured: true
 order: 1
-# Add real numbers before sending this to a client. Format:
-# metrics:
-#   - value: "p95 1.2s"
-#     label: first token latency
-#     note: streaming, 40 concurrent sessions
-metrics: []
+metrics:
+  - value: "NDCG@10 0.808"
+    label: golden-set retrieval relevance
+  - value: "28–59 ms p50"
+    label: hybrid search engine latency
+  - value: "~73%"
+    label: token cut via history summarization
 ---
 
 ## The problem

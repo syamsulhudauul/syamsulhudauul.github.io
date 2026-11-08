@@ -22,7 +22,7 @@ contact:
   whatsapp: ""
   whatsapp_message: "Hi Syamsul — saw your portfolio, I'd like to discuss a project."
   github: https://github.com/syamsulhudauul
-  linkedin: ""
+  linkedin: https://www.linkedin.com/in/syamsulhudauul/
   # Interactive demo — the AI agent grounded in your own work history.
   chat_demo: ""
   chat_demo_label: Ask my AI agent about my work
@@ -49,6 +49,7 @@ stack:
   - Python
   - TypeScript / Next.js
   - PostgreSQL / pgvector
+  - Elasticsearch
   - Qdrant
   - gRPC
   - LiteLLM
@@ -62,7 +63,7 @@ stack:
 proof:
   - value: "10M+"
     label: users served by systems I build on
-  - value: "5 yrs"
+  - value: "8+ yrs"
     label: backend & applied AI
   - value: "p95 < 1s"
     label: typical LLM endpoint target
