@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syamsul Huda — Solusi AI & Otomasi Alur Bisnis</title>
+  <style>
+    :root {
+      --bg: #fffdf9;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #22c55e;
+      --accent-hover: #16a34a;
+      --border: #0f172a;
+      --yellow: #fef08a;
+      --orange: #ffedd5;
+      --blue: #e0f2fe;
+      --shadow: 4px 4px 0px #0f172a;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      line-height: 1.6;
+      padding: 0 16px 80px;
+    }
+    .container {
+      max-width: 740px;
+      margin: 0 auto;
+    }
+
+    /* Top Nav */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--border);
+    }
+    .nav-brand {
+      font-weight: 900;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-badge {
+      font-size: 11px;
+      font-weight: 700;
+      background: #ecfdf5;
+      color: #059669;
+      border: 1.5px solid #059669;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 16px 0 28px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--yellow);
+      border: 2px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 2px 2px 0px var(--border);
+      margin-bottom: 16px;
+    }
+    .badge-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #10b981;
+      display: inline-block;
+    }
+    .hero h1 {
+      font-size: clamp(26px, 5.2vw, 40px);
+      font-weight: 900;
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .hero h1 span {
+      background: var(--yellow);
+      padding: 0 6px;
+      border: 2px solid var(--border);
+      box-shadow: 3px 3px 0px var(--border);
+      display: inline-block;
+      margin-top: 4px;
+    }
+    .hero-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    
+    /* ---------- Modern 3 Mascot Stage (Light Cerah Theme) ---------- */
+    .mascot-stage {
+      position: relative;
+      margin: 20px 0 32px;
+      border: 3px solid var(--border);
+      border-radius: 24px;
+      padding: 38px 12px 14px;
+      background:
+        radial-gradient(120% 90% at 50% 120%, rgba(34,197,94,.12), transparent 60%),
+        linear-gradient(180deg, #ffffff, #f8fafc);
+      box-shadow: var(--shadow);
+      touch-action: pan-y;
+      overflow: hidden;
+    }
+    .mascot-stage::before {
+      content: ""; position: absolute; inset: 0; border-radius: inherit; opacity: .45; pointer-events: none;
+      background-image: radial-gradient(rgba(15,23,42,.08) 1px, transparent 1px); background-size: 16px 16px;
+      -webkit-mask-image: radial-gradient(70% 70% at 50% 40%, #000, transparent);
+      mask-image: radial-gradient(70% 70% at 50% 40%, #000, transparent);
+    }
+    .stage-tag {
+      position: absolute; top: 10px; left: 50%; transform: translateX(-50%); font-size: 10.5px; font-weight: 800;
+      letter-spacing: .02em; background: #fef08a; color: #0f172a; border: 1.5px solid #0f172a;
+      padding: 3px 14px; border-radius: 999px; white-space: nowrap; box-shadow: 2px 2px 0px #0f172a;
+      z-index: 5;
+    }
+    .trio {
+      position: relative; display: flex; justify-content: space-around; align-items: flex-end;
+      gap: clamp(4px, 2vw, 18px); min-height: 220px;
+    }
+    .char {
+      position: relative; display: flex; flex-direction: column; align-items: center; cursor: pointer;
+      will-change: transform; transform-origin: 50% 100%; outline: none;
+    }
+    .char svg { display: block; overflow: visible; height: auto; pointer-events: none; }
+    .char.uul svg { width: clamp(104px, 30vw, 168px); }
+    .char.bot svg { width: clamp(84px, 24vw, 134px); }
+    .char.gear svg { width: clamp(78px, 22vw, 124px); }
+    .shadow {
+      width: 70%; height: 10px; margin-top: -4px; border-radius: 50%;
+      background: radial-gradient(closest-side, rgba(15,23,42,.24), transparent);
+      transform-origin: 50% 50%;
+    }
+    .label {
+      margin-top: 8px; font-size: 11px; font-weight: 800; color: #0f172a;
+      background: #ffffff; border: 1.5px solid #0f172a; padding: 3px 10px; border-radius: 999px;
+      white-space: nowrap; box-shadow: 2px 2px 0px #0f172a;
+    }
+    .label small { color: #64748b; font-weight: 600; }
+    .char:focus-visible .label { border-color: #22c55e; }
+
+    .bubble {
+      position: absolute; bottom: calc(100% - 6px); left: 50%; z-index: 15; max-width: 200px;
+      background: #0f172a; color: #ffffff; font-size: 11.5px; font-weight: 800; line-height: 1.35; text-align: center;
+      padding: 7px 12px; border-radius: 12px; width: max-content; pointer-events: none;
+      opacity: 0; transform: translate(-50%, 8px) scale(.85); transform-origin: 50% 100%;
+      box-shadow: 0 4px 14px rgba(15,23,42,.2);
+      transition: opacity .18s, transform .35s cubic-bezier(.34,1.56,.64,1);
+    }
+    .bubble::after {
+      content: ""; position: absolute; top: 100%; left: 50%; margin-left: -6px;
+      border: 6px solid transparent; border-top-color: #0f172a;
+    }
+    .bubble.on { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    @media (hover: hover) { .char:hover .bubble { opacity: 1; transform: translate(-50%, 0) scale(1); } }
+
+    /* SVG animations */
+    .wifi path { animation: wifi 1.8s ease-in-out infinite; opacity: .25; }
+    .wifi path:nth-child(2) { animation-delay: .25s; }
+    .wifi path:nth-child(3) { animation-delay: .5s; }
+    @keyframes wifi { 0%, 100% { opacity: .2; } 40% { opacity: 1; } }
+    .dots circle { animation: typing 1.2s infinite; }
+    .dots circle:nth-child(2) { animation-delay: .15s; }
+    .dots circle:nth-child(3) { animation-delay: .3s; }
+    @keyframes typing { 0%, 60%, 100% { opacity: .3; } 30% { opacity: 1; } }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 22px;
+      font-size: 14px;
+      font-weight: 800;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 4px 6px 0px var(--border);
+    }
+    .btn-secondary {
+      background: #ffffff;
+      color: var(--text);
+      box-shadow: var(--shadow);
+    }
+    .btn-secondary:hover {
+      background: var(--yellow);
+      transform: translateY(-2px);
+    }
+
+    /* Proof Numbers */
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+      margin-bottom: 44px;
+    }
+    .proof-item {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 3px 3px 0px var(--border);
+    }
+    .proof-num {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .proof-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* Solution Card Layout */
+    .solution-card {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: 18px;
+      padding: 24px 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
+    }
+    .card-head-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .service-tag {
+      font-size: 11px;
+      font-weight: 800;
+      background: var(--yellow);
+      border: 1.5px solid var(--border);
+      padding: 2px 10px;
+      border-radius: 999px;
+    }
+    .card-title {
+      font-size: 19px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    /* Professional Narrative Sections */
+    .block-pain {
+      background: #fff1f2;
+      border-left: 4px solid #f43f5e;
+      padding: 12px 14px;
+      border-radius: 4px 10px 10px 4px;
+      margin-bottom: 14px;
+      font-size: 13.5px;
+      color: #881337;
+      line-height: 1.55;
+    }
+    .block-pain h5 {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+      color: #be123c;
+    }
+
+    .block-sol {
+      background: #f0fdf4;
+      border-left: 4px solid #22c55e;
+      padding: 12px 14px;
+      border-radius: 4px 10px 10px 4px;
+      margin-bottom: 16px;
+      font-size: 13.5px;
+      color: #14532d;
+      line-height: 1.55;
+    }
+    .block-sol h5 {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+      color: #15803d;
+    }
+
+    .block-results {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 14px;
+    }
+    .block-results h5 {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #0f172a;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .results-list {
+      list-style: none;
+      font-size: 13px;
+      color: #334155;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .results-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .results-list li::before {
+      content: "✔";
+      color: #16a34a;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    /* Interactive WA Demo */
+    .demo-box {
+      background: #f1f5f9;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      margin: 16px 0;
+    }
+    .demo-bar {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 800;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+    .wa-chat {
+      background: #efeae2;
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.5px;
+    }
+    .chat-bubble {
+      max-width: 85%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      line-height: 1.4;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .chat-user {
+      align-self: flex-end;
+      background: #dcf8c6;
+      border-top-right-radius: 0;
+    }
+    .chat-bot {
+      align-self: flex-start;
+      background: #ffffff;
+      border-top-left-radius: 0;
+    }
+    .chip-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .chip-btn {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 1px 1px 0px var(--border);
+      transition: background 0.15s ease;
+    }
+    .chip-btn:hover {
+      background: var(--yellow);
+    }
+
+    /* Final CTA Section */
+    .final-cta {
+      background: var(--yellow);
+      border: 3px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 6px 6px 0px var(--border);
+      margin-top: 48px;
+    }
+    .final-cta h2 {
+      font-size: 23px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+    .final-cta p {
+      font-size: 14.5px;
+      color: #334155;
+      max-width: 520px;
+      margin: 0 auto 22px;
+    }
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .trust-pill {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Nav Bar -->
+    <header class="nav">
+      <div class="nav-brand">
+        <span>⚡ Syamsul Huda (Uul)</span>
+      </div>
+      <div class="nav-badge">
+        Mantan Engineer ByteDance &amp; Tokopedia
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span class="badge-dot"></span> Khusus Bisnis Berkembang di Indonesia · Slot Bulan Ini: 2 Klien
+      </div>
+      <h1>
+        Bikin Bisnis Anda Berjalan Otomatis 24/7<br>
+        <span>Tanpa Pusing Nambah Tim Admin.</span>
+      </h1>
+      <p class="hero-desc">
+        Solusi asisten AI privat &amp; otomasi alur kerja khusus pemilik toko, brand, dan UMKM berkembang. Menjawab chat pelanggan instan, memvalidasi bukti transfer, dan merekap pesanan otomatis ke sistem Anda—bahkan saat Anda sedang tidur.
+      </p>
+
+      <!-- Modern Interactive 3 Mascot Trio Stage (Spring Physics & Gaze Tracking) -->
+      <section class="mascot-stage" id="stage" aria-label="Trio karakter AI interaktif">
+        <div class="stage-tag">Gerakkan kursor · sentuh · scroll · klik karakter</div>
+        <div class="trio">
+          <!-- ================= CHAT-BOT ================= -->
+      <div class="char bot" id="charMascotBot" tabindex="0" role="button" aria-label="Chat-Bot, maskot WhatsApp sales">
+        <div class="bubble" id="bubbleMascotBot">CS 24 jam, tanpa libur!</div>
+        <svg viewBox="0 0 160 190" aria-hidden="true">
+          <defs>
+            <linearGradient id="gBody" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#6ee7a0"/><stop offset=".55" stop-color="#34d27b"/><stop offset="1" stop-color="#16a34a"/>
+            </linearGradient>
+            <radialGradient id="gGloss" cx=".3" cy=".15" r=".6">
+              <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="gVisor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#10261a"/><stop offset="1" stop-color="#07140d"/>
+            </linearGradient>
+            <clipPath id="clBotEyeL"><circle cx="58" cy="97" r="14"/></clipPath>
+            <clipPath id="clBotEyeR"><circle cx="102" cy="97" r="14"/></clipPath>
+          </defs>
+          <!-- antenna -->
+          <g id="botAnt" style="transform-origin:80px 52px">
+            <rect x="77.5" y="22" width="5" height="34" rx="2.5" fill="#15803d"/>
+            <circle cx="80" cy="20" r="8" fill="#fbbf24"/>
+            <circle cx="77.5" cy="17.5" r="2.6" fill="#fff" opacity=".7"/>
+            <g class="wifi" fill="none" stroke="#4ade80" stroke-width="3.2" stroke-linecap="round">
+              <path d="M70 6 Q80 -1 90 6"/><path d="M63 -1 Q80 -13 97 -1"/><path d="M56 -8 Q80 -25 104 -8"/>
+            </g>
+          </g>
+          <!-- arms -->
+          <g id="botArmL" style="transform-origin:26px 112px"><ellipse cx="18" cy="116" rx="11" ry="14" fill="#22c55e"/></g>
+          <g id="botArmR" style="transform-origin:134px 112px"><ellipse cx="142" cy="116" rx="11" ry="14" fill="#22c55e"/></g>
+          <!-- feet -->
+          <ellipse cx="56" cy="170" rx="17" ry="9" fill="#15803d"/><ellipse cx="104" cy="170" rx="17" ry="9" fill="#15803d"/>
+          <!-- body -->
+          <g id="botBody" style="transform-origin:80px 165px">
+            <path d="M22 98 Q22 52 80 52 Q138 52 138 98 L138 122 Q138 168 80 168 Q22 168 22 122 Z" fill="url(#gBody)"/>
+            <path d="M22 98 Q22 52 80 52 Q138 52 138 98 L138 122 Q138 168 80 168 Q22 168 22 122 Z" fill="url(#gGloss)"/>
+            <!-- chat tail -->
+            <path d="M40 160 L26 184 L62 168 Z" fill="#16a34a"/>
+            <!-- visor -->
+            <rect x="32" y="70" width="96" height="56" rx="28" fill="url(#gVisor)"/>
+            <rect x="32" y="70" width="96" height="56" rx="28" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+            <!-- eyes -->
+            <g id="botEyeL" style="transform-origin:58px 97px">
+              <circle cx="58" cy="97" r="14" fill="#f4fff8"/>
+              <g clip-path="url(#clBotEyeL)"><g id="pBotL"><circle cx="58" cy="97" r="8" fill="#0b1b12"/><circle cx="61" cy="93.5" r="3" fill="#fff"/></g></g>
+            </g>
+            <g id="botEyeR" style="transform-origin:102px 97px">
+              <circle cx="102" cy="97" r="14" fill="#f4fff8"/>
+              <g clip-path="url(#clBotEyeR)"><g id="pBotR"><circle cx="102" cy="97" r="8" fill="#0b1b12"/><circle cx="105" cy="93.5" r="3" fill="#fff"/></g></g>
+            </g>
+            <!-- mouth + blush -->
+            <path id="botMouth" d="M72 134 Q80 144 88 134" fill="none" stroke="#14532d" stroke-width="4" stroke-linecap="round" style="transform-origin:80px 134px"/>
+            <ellipse cx="38" cy="134" rx="7" ry="4" fill="#fda4af" opacity=".6"/><ellipse cx="122" cy="134" rx="7" ry="4" fill="#fda4af" opacity=".6"/>
+          </g>
+          <!-- typing bubble -->
+          <g id="botTyping" style="transform-origin:140px 46px">
+            <rect x="116" y="28" width="38" height="24" rx="12" fill="#fff"/><path d="M124 50 L120 60 L134 51 Z" fill="#fff"/>
+            <g class="dots" fill="#16a34a"><circle cx="127" cy="40" r="3"/><circle cx="135" cy="40" r="3"/><circle cx="143" cy="40" r="3"/></g>
+          </g>
+        </svg>
+        <div class="shadow" id="shMascotBot"></div>
+        <div class="label">Chat-Bot <small>· WA Sales</small></div>
+      </div>
+          <!-- ================= UUL ================= -->
+      <div class="char uul" id="charMascotUul" tabindex="0" role="button" aria-label="Uul, AI builder">
+        <div class="bubble" id="bubbleMascotUul">Halo! Saya Uul 👋</div>
+        <svg viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="gSkin" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f0b98f"/><stop offset="1" stop-color="#d89870"/>
+            </linearGradient>
+            <linearGradient id="gHood" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#b9bfcc"/><stop offset="1" stop-color="#8f96a6"/>
+            </linearGradient>
+            <linearGradient id="gHair" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#2b2838"/><stop offset="1" stop-color="#14121b"/>
+            </linearGradient>
+            <clipPath id="clUulBody"><path d="M14 250 Q16 196 70 182 L130 182 Q184 196 186 250 Z"/></clipPath>
+            <clipPath id="clUulEyeL"><ellipse cx="80" cy="106" rx="10.5" ry="11"/></clipPath>
+            <clipPath id="clUulEyeR"><ellipse cx="120" cy="106" rx="10.5" ry="11"/></clipPath>
+          </defs>
+          <!-- body group (breathing) -->
+          <g id="uulBody" style="transform-origin:100px 250px">
+            <ellipse cx="100" cy="176" rx="66" ry="30" fill="#7d8494"/>   <!-- hood back -->
+            <path d="M14 250 Q16 196 70 182 L130 182 Q184 196 186 250 Z" fill="url(#gHood)"/>
+            <path d="M14 250 Q16 196 70 182 L130 182 Q184 196 186 250 Z" fill="url(#gGloss)" opacity=".5"/>
+            <rect x="85" y="150" width="30" height="40" rx="14" fill="#c98b64"/> <!-- neck -->
+            <path d="M62 180 Q100 214 138 180 Q136 202 100 212 Q64 202 62 180 Z" fill="#7d8494"/>  <!-- hood collar -->
+            <path d="M70 184 Q100 206 130 184" fill="none" stroke="#2c3a4a" stroke-width="5" stroke-linecap="round" opacity=".55"/> <!-- teal tee peek -->
+            <!-- drawstrings -->
+            <path d="M80 200 Q76 220 78 238" fill="none" stroke="#efe9dc" stroke-width="3" stroke-linecap="round"/>
+            <path d="M120 200 Q124 220 122 238" fill="none" stroke="#efe9dc" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="78" cy="239" r="3.2" fill="#d9d1bf"/><circle cx="122" cy="239" r="3.2" fill="#d9d1bf"/>
+            <!-- chest badge -->
+            <g clip-path="url(#clUulBody)">
+              <circle cx="100" cy="250" r="30" fill="#1b2233"/><circle cx="100" cy="250" r="30" fill="none" stroke="#f4f6fb" stroke-width="3"/>
+              <circle cx="100" cy="250" r="22" fill="none" stroke="#4ade80" stroke-width="1.6" stroke-dasharray="3 4"/>
+              <path d="M100 224 l3 8 8 1 -6 5 2 8 -7 -4 -7 4 2 -8 -6 -5 8 -1z" fill="#fbbf24"/>
+            </g>
+          </g>
+          <!-- head group (tilt/nod) -->
+          <g id="uulHead" style="transform-origin:100px 160px">
+            <ellipse cx="52" cy="112" rx="9" ry="13" fill="#d89870"/><ellipse cx="148" cy="112" rx="9" ry="13" fill="#d89870"/>
+            <ellipse cx="52" cy="113" rx="4" ry="7" fill="#c07f58"/><ellipse cx="148" cy="113" rx="4" ry="7" fill="#c07f58"/>
+            <!-- face -->
+            <path d="M52 104 Q52 54 100 54 Q148 54 148 104 Q148 156 100 164 Q52 156 52 104 Z" fill="url(#gSkin)"/>
+            <!-- faint beard + mustache -->
+            <path d="M60 124 Q64 160 100 164 Q136 160 140 124 Q130 146 100 148 Q70 146 60 124 Z" fill="#2a2430" opacity=".32"/>
+            <path d="M82 134 Q100 124 118 134 Q100 130 82 134 Z" fill="#2a2430" opacity=".55"/>
+            <ellipse cx="100" cy="153" rx="9" ry="4.5" fill="#2a2430" opacity=".4"/>
+            <!-- cheeks -->
+            <ellipse cx="68" cy="130" rx="8" ry="5" fill="#f08a7e" opacity=".35"/><ellipse cx="132" cy="130" rx="8" ry="5" fill="#f08a7e" opacity=".35"/>
+            <!-- eyes -->
+            <g id="uulEyeL" style="transform-origin:80px 106px">
+              <ellipse cx="80" cy="106" rx="10.5" ry="11" fill="#fff"/>
+              <g clip-path="url(#clUulEyeL)"><g id="pUulL"><circle cx="80" cy="106" r="7" fill="#3b2418"/><circle cx="80" cy="106" r="4" fill="#120a07"/><circle cx="83" cy="102.5" r="2.4" fill="#fff"/></g></g>
+            </g>
+            <g id="uulEyeR" style="transform-origin:120px 106px">
+              <ellipse cx="120" cy="106" rx="10.5" ry="11" fill="#fff"/>
+              <g clip-path="url(#clUulEyeR)"><g id="pUulR"><circle cx="120" cy="106" r="7" fill="#3b2418"/><circle cx="120" cy="106" r="4" fill="#120a07"/><circle cx="123" cy="102.5" r="2.4" fill="#fff"/></g></g>
+            </g>
+            <!-- brows -->
+            <g id="uulBrows" style="transform-origin:100px 92px">
+              <path d="M66 91 Q80 82 94 90" fill="none" stroke="#1b1822" stroke-width="5" stroke-linecap="round"/>
+              <path d="M106 90 Q120 82 134 91" fill="none" stroke="#1b1822" stroke-width="5" stroke-linecap="round"/>
+            </g>
+            <!-- nose -->
+            <path d="M100 112 Q94 128 103 130" fill="none" stroke="#b97650" stroke-width="3" stroke-linecap="round"/>
+            <!-- mouth -->
+            <g id="uulMouth" style="transform-origin:100px 138px">
+              <path d="M82 137 Q100 158 118 137 Q100 143 82 137 Z" fill="#6b2430"/>
+              <path d="M85 138.5 Q100 144.5 115 138.5 Q113 148 100 149 Q87 148 85 138.5 Z" fill="#fff"/>
+            </g>
+            <!-- hair (lagging spring) -->
+            <g id="uulHair" style="transform-origin:100px 80px">
+              <path d="M46 108 Q36 64 62 48 L56 22 L80 40 L88 10 L104 38 L122 12 L126 42 L148 26 L142 54 Q164 70 154 108 Q150 82 136 74 Q100 62 64 74 Q50 82 46 108 Z" fill="url(#gHair)"/>
+              <path d="M70 52 L74 36 L84 48" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M108 44 L118 26 L120 44" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="2.5" stroke-linecap="round"/>
+            </g>
+          </g>
+        </svg>
+        <div class="shadow" id="shMascotUul"></div>
+        <div class="label">Uul <small>· AI Builder</small></div>
+      </div>
+          <!-- ================= GEAR ================= -->
+      <div class="char gear" id="charMascotGear" tabindex="0" role="button" aria-label="Workflow-Gear, maskot otomasi">
+        <div class="bubble" id="bubbleMascotGear">Otomasi tanpa capek!</div>
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <defs>
+            <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fde68a"/><stop offset=".5" stop-color="#fbbf24"/><stop offset="1" stop-color="#d97706"/>
+            </linearGradient>
+            <linearGradient id="gFace" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#fffbeb"/><stop offset="1" stop-color="#fde9a8"/>
+            </linearGradient>
+            <clipPath id="clGearEyeL"><circle cx="66" cy="76" r="9"/></clipPath>
+            <clipPath id="clGearEyeR"><circle cx="94" cy="76" r="9"/></clipPath>
+          </defs>
+          <g id="gearBody" style="transform-origin:80px 80px">
+            <path id="gearShade" fill="#b45309" transform="translate(0 4)"/>
+            <path id="gearMain" fill="url(#gGold)"/>
+            <circle cx="80" cy="80" r="50" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2"/>
+            <circle cx="80" cy="80" r="50" fill="none" stroke="#b45309" stroke-width="1.5" stroke-dasharray="2 9" opacity=".5"/>
+            <g fill="#92400e" opacity=".55" id="gearRivets"></g>
+          </g>
+          <circle cx="80" cy="80" r="38" fill="url(#gFace)"/>
+          <circle cx="80" cy="80" r="38" fill="none" stroke="#d97706" stroke-width="3"/>
+          <g id="gearFace">
+            <g style="transform-origin:66px 76px" id="gearEyeL">
+              <circle cx="66" cy="76" r="9" fill="#fff" stroke="#e8c76b" stroke-width="1"/>
+              <g clip-path="url(#clGearEyeL)"><g id="pGearL"><circle cx="66" cy="76" r="5.6" fill="#3a2108"/><circle cx="68" cy="73.5" r="2" fill="#fff"/></g></g>
+            </g>
+            <g style="transform-origin:94px 76px" id="gearEyeR">
+              <circle cx="94" cy="76" r="9" fill="#fff" stroke="#e8c76b" stroke-width="1"/>
+              <g clip-path="url(#clGearEyeR)"><g id="pGearR"><circle cx="94" cy="76" r="5.6" fill="#3a2108"/><circle cx="96" cy="73.5" r="2" fill="#fff"/></g></g>
+            </g>
+            <ellipse cx="54" cy="91" rx="5.5" ry="3.4" fill="#fb923c" opacity=".45"/><ellipse cx="106" cy="91" rx="5.5" ry="3.4" fill="#fb923c" opacity=".45"/>
+            <path id="gearMouth" d="M71 93 Q80 102 89 93" fill="none" stroke="#78350f" stroke-width="3.5" stroke-linecap="round" style="transform-origin:80px 93px"/>
+          </g>
+        </svg>
+        <div class="shadow" id="shMascotGear"></div>
+        <div class="label">Workflow-Gear <small>· Otomasi</small></div>
+      </div>
+        </div>
+      </section>
+
+    <!-- 3 Core Solutions -->
+    <div id="layanan">
+
+      <!-- Solution 1 -->
+      <div class="solution-card">
+        <div class="card-head-row">
+          <span class="service-tag">Layanan 01 · Sales &amp; Customer Support</span>
+        </div>
+        <h3 class="card-title">Chat Pelanggan Dibalas Instan 24 Jam — Closing Otomatis Walau Anda Sedang Tidur</h3>
+        
+        <div class="block-pain">
+          <h5>⚠️ Yang Sering Terjadi di Lapangan:</h5>
+          Chat pelanggan menumpuk malam hari atau saat hari libur. Respon telat 10 menit saja, calon pembeli sudah checkout di toko sebelah. Rekrut admin shift malam? Biaya gaji membengkak dan sering salah kasih info harga atau ketersediaan stok.
+        </div>
+
+        <div class="block-sol">
+          <h5>✨ Cara Kerja Solusi AI Kami:</h5>
+          Kami memasang asisten AI privat yang diajari katalog lengkap, harga promo, dan SOP toko Anda. Menjawab ramah dalam Bahasa Indonesia natural, mengecek ketersediaan stok secara realtime, dan memandu pembeli sampai transfer selesai.
+        </div>
+
+        <!-- Interactive Demo -->
+        <div class="demo-box">
+          <div class="demo-bar">
+            <span>🎮 Coba Interaktif: Simulasi Chat Pelanggan</span>
+            <span>Live Response</span>
+          </div>
+          <div class="wa-chat">
+            <div class="chat-bubble chat-user" id="cUser">"Halo kak, susu oatmilk 1L ada yang promo hari ini?"</div>
+            <div class="chat-bubble chat-bot" id="cBot">"Halo Kak! Ada dong, Oatside Barista 1L lagi promo Rp 38.500 dari Rp 45.000. Stok sisa 12 pcs di gudang. Mau dibungkus kak? Bisa kirim instan sekarang 😊"</div>
+          </div>
+          <div class="chip-row">
+            <button class="chip-btn" onclick="setChat('promo')">Coba: Tanya Promo</button>
+            <button class="chip-btn" onclick="setChat('stok')">Coba: Cek Ketersediaan Stok</button>
+            <button class="chip-btn" onclick="setChat('ongkir')">Coba: Cek Ongkir ke Bandung</button>
+          </div>
+        </div>
+
+        <div class="block-results">
+          <h5>Hasil Nyata untuk Bisnis Anda:</h5>
+          <ul class="results-list">
+            <li><strong>Respon &lt; 3 detik 24/7</strong> tanpa perlu mengeluarkan biaya lembur admin malam.</li>
+            <li><strong>0 calon pembeli kabur</strong> karena respon lambat saat jam istirahat.</li>
+            <li><strong>Kenaikan omset malam hari &amp; weekend</strong> hingga 20%–35% secara konsisten.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Solution 2 -->
+      <div class="solution-card">
+        <div class="card-head-row">
+          <span class="service-tag" style="background: #ffedd5; color: #9a3412;">Layanan 02 · Alur Kerja &amp; Pembukuan</span>
+        </div>
+        <h3 class="card-title">Hentikan Ketik Ulang Resi &amp; Struk — Rekap Pesanan Selesai dalam 1 Detik</h3>
+
+        <div class="block-pain">
+          <h5>⚠️ Yang Sering Terjadi di Lapangan:</h5>
+          Admin menghabiskan 4–5 jam setiap hari hanya untuk membaca bukti transfer, mencocokkan mutasi bank, dan menyalin data pesanan ke Excel. Sangat melelahkan, rawan salah catat barang, dan rentan tertipu struk transfer palsu/editan.
+        </div>
+
+        <div class="block-sol">
+          <h5>✨ Cara Kerja Solusi AI Kami:</h5>
+          Sistem AI membaca foto bukti transfer, memvalidasi keaslian mutasi rekening, mencatat data pesanan otomatis ke Google Sheets atau ERP Anda, dan mengirimkan pesan konfirmasi nomor resi ke WhatsApp pembeli secara instan.
+        </div>
+
+        <div class="block-results">
+          <h5>Hasil Nyata untuk Bisnis Anda:</h5>
+          <ul class="results-list">
+            <li><strong>Jam kerja admin manual dipangkas 85%</strong> — tim Anda bisa fokus jualan dan ekspansi.</li>
+            <li><strong>Bebas risiko penipuan struk palsu</strong> berkat verifikasi optik otomatis.</li>
+            <li><strong>Pembukuan dan laporan stok selalu sinkron</strong> setiap detik tanpa selisih.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Solution 3 -->
+      <div class="solution-card">
+        <div class="card-head-row">
+          <span class="service-tag" style="background: #e0f2fe; color: #0369a1;">Layanan 03 · Katalog &amp; E-Commerce</span>
+        </div>
+        <h3 class="card-title">Konsumen Salah Ketik? Produk Tetap Ketemu Seketika</h3>
+
+        <div class="block-pain">
+          <h5>⚠️ Yang Sering Terjadi di Lapangan:</h5>
+          Konsumen mengetik kata typo (misal: "kaos ovrsiz" atau "sepatu sneaker pth") lalu layar toko Anda menampilkan <em>"Produk Tidak Ditemukan"</em>. Pembeli langsung mengira stok kosong dan menutup website Anda untuk pindah ke toko lain.
+        </div>
+
+        <div class="block-sol">
+          <h5>✨ Cara Kerja Solusi AI Kami:</h5>
+          Algoritma pencarian cerdas yang memahami konteks, typo, dan sinonim kata bahasa Indonesia sehari-hari. Produk yang paling relevan selalu ditampilkan di urutan teratas seketika.
+        </div>
+
+        <div class="block-results">
+          <h5>Hasil Nyata untuk Bisnis Anda:</h5>
+          <ul class="results-list">
+            <li><strong>Kenaikan omset transaksi belanja hingga +16%</strong> (terbukti dari sistem skala jutaan pengguna di ByteDance).</li>
+            <li><strong>Mencegah pembeli kabur</strong> karena pencarian toko online Anda tidak pernah zonk.</li>
+            <li><strong>Pengalaman belanja cepat</strong> yang membuat pelanggan nyaman belanja berulang kali (repeat order).</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Final Call to Action -->
+    <div class="final-cta">
+      <div class="trust-badges">
+        <span class="trust-pill">🛡️ Data 100% Privat &amp; Aman</span>
+        <span class="trust-pill">⚙️ Kustom Sesuai Alur Toko Anda</span>
+        <span class="trust-pill">🤝 Garansi Dampingi Sampai Jalan</span>
+      </div>
+      <h2>Punya Alur Kerja yang Ingin Diotomatisasi?</h2>
+      <p>
+        Setiap bisnis punya tantangan unik. Mari ngobrol santai 30 menit lewat WhatsApp. Saya akan bedah alur operasional Anda dan memberikan solusi AI yang paling cepat menghasilkan efisiensi nyata.
+      </p>
+      <a class="btn btn-primary" style="font-size: 15px; padding: 14px 28px;" href="https://wa.me/6281212888355?text=Halo%20Syamsul,%20saya%20mau%20konsultasi%20kebutuhan%20otomasi%20AI%20di%20bisnis%20saya" target="_blank">
+        💬 Chat WhatsApp Syamsul Sekarang
+      </a>
+    </div>
+
+  </div>
+
+  
+  <!-- Spring Physics & Interaction Engine for Modern Mascots -->
+  <script>
+  (() => {
+    'use strict';
+    const $ = id => document.getElementById(id);
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+    const NS = 'http://www.w3.org/2000/svg';
+
+    /* ---------- Gear geometry (procedural 10-tooth gear) ---------- */
+    (function buildGear() {
+      const n = 10, cx = 80, cy = 80, ro = 72, ri = 58, step = Math.PI * 2 / n;
+      const pt = (r, a) => (cx + Math.cos(a) * r).toFixed(1) + ' ' + (cy + Math.sin(a) * r).toFixed(1);
+      let d = '';
+      for (let i = 0; i < n; i++) {
+        const a = i * step;
+        d += (i ? 'L' : 'M') + pt(ri, a - step * .5 + step * .06) +
+          'L' + pt(ri, a - step * .30) + 'L' + pt(ro, a - step * .17) +
+          'L' + pt(ro, a + step * .17) + 'L' + pt(ri, a + step * .30);
+      }
+      d += 'Z';
+      const gm = $('gearMain'); const gs = $('gearShade');
+      if (gm) gm.setAttribute('d', d);
+      if (gs) gs.setAttribute('d', d);
+      const g = $('gearRivets');
+      if (g) {
+        g.innerHTML = '';
+        for (let i = 0; i < 6; i++) {
+          const c = document.createElementNS(NS, 'circle');
+          const a = i * Math.PI / 3 + .5;
+          c.setAttribute('cx', (80 + Math.cos(a) * 45).toFixed(1));
+          c.setAttribute('cy', (80 + Math.sin(a) * 45).toFixed(1));
+          c.setAttribute('r', 2.6);
+          g.appendChild(c);
+        }
+      }
+    })();
+
+    /* ---------- Input: mouse, pen, touch ---------- */
+    let mx = innerWidth / 2, my = innerHeight * .3, lastInput = -1e9;
+    const setPt = (x, y) => { mx = x; my = y; lastInput = performance.now(); };
+    addEventListener('pointermove', e => setPt(e.clientX, e.clientY), { passive: true });
+    addEventListener('pointerdown', e => setPt(e.clientX, e.clientY), { passive: true });
+    addEventListener('touchstart', e => { const t = e.touches[0]; if (t) setPt(t.clientX, t.clientY); }, { passive: true });
+    addEventListener('touchmove', e => { const t = e.touches[0]; if (t) setPt(t.clientX, t.clientY); }, { passive: true });
+
+    /* ---------- Springs ---------- */
+    const spring = (k, c) => ({ x: 0, v: 0, k, c });
+    const stepSpring = (s, dt) => { s.v += (-s.k * s.x - s.c * s.v) * dt; s.x += s.v * dt; };
+
+    /* ---------- Characters ---------- */
+    const mkChar = (box, o) => Object.assign({
+      box: $(box), shadow: null, sp: null, look: { x: 0, y: 0 },
+      blink: 1, nextBlink: 1000 + Math.random() * 2500, blinkAt: -1, mood: 0
+    }, o);
+
+    const uul = mkChar('charMascotUul', {
+      sp: spring(150, 11), tilt: spring(90, 9), hair: spring(140, 7),
+      eyes: [$('pUulL'), $('pUulR')], lids: [$('uulEyeL'), $('uulEyeR')], r: 4.2, ax: .5, ay: .43
+    });
+    const bot = mkChar('charMascotBot', {
+      sp: spring(110, 7), tilt: spring(80, 6), ant: spring(130, 4.5),
+      eyes: [$('pBotL'), $('pBotR')], lids: [$('botEyeL'), $('botEyeR')], r: 5.5, ax: .5, ay: .5
+    });
+    const gear = mkChar('charMascotGear', {
+      sp: spring(80, 6), tilt: spring(70, 8),
+      eyes: [$('pGearL'), $('pGearR')], lids: [$('gearEyeL'), $('gearEyeR')], r: 3.6, ax: .5, ay: .48,
+      angle: 0, omega: 24, dizzy: 0
+    });
+    const chars = [uul, bot, gear];
+    uul.shadow = $('shMascotUul');
+    bot.shadow = $('shMascotBot');
+    gear.shadow = $('shMascotGear');
+
+    /* ---------- Scroll reactivity ---------- */
+    let lastY = scrollY, scrollVel = 0, pendingDy = 0;
+    const onScroll = () => {
+      const y = scrollY, dy = y - lastY; lastY = y; pendingDy += dy;
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+
+    /* ---------- Poke / Speech bubbles ---------- */
+    const lines = {
+      charMascotUul: [
+        'Halo! Saya Syamsul (Uul) 👋',
+        'Punya alur kerja yang ribet? Ceritakan!',
+        'Kita bangun sistem AI privat untuk bisnismu 🚀',
+        'Hehe, geli disentuh! 😄'
+      ],
+      charMascotBot: [
+        'CS 24 jam nonstop! 💬',
+        'Pesan masuk? Langsung saya balas kilat ⚡',
+        'Ting! Pesanan & lead baru masuk 🛒',
+        'Ayo ngobrol di WhatsApp!'
+      ],
+      charMascotGear: [
+        'Rekap resi & data jalan sendiri ⚙️',
+        'Kerja berulang beres tanpa capek!',
+        'Wuuush… pusing kalau scroll kencang 🌀',
+        'Tugas berulang? Serahkan ke saya.'
+      ]
+    };
+    const bubbleOf = {
+      charMascotUul: $('bubbleMascotUul'),
+      charMascotBot: $('bubbleMascotBot'),
+      charMascotGear: $('bubbleMascotGear')
+    };
+    const timers = {};
+    const idx = { charMascotUul: 0, charMascotBot: 0, charMascotGear: 0 };
+    function say(c, text) {
+      const b = bubbleOf[c.box.id];
+      if (!b) return;
+      if (text) b.textContent = text;
+      b.classList.add('on');
+      clearTimeout(timers[c.box.id]);
+      timers[c.box.id] = setTimeout(() => b.classList.remove('on'), 2400);
+    }
+    function poke(c) {
+      const l = lines[c.box.id];
+      idx[c.box.id] = (idx[c.box.id] + 1) % l.length;
+      say(c, l[idx[c.box.id]]);
+      c.sp.v = -520; c.mood = 1;
+      if (c.ant) c.ant.v = 900;
+      if (c === gear) gear.omega += 700;
+      if (navigator.vibrate) { try { navigator.vibrate(8); } catch (e) {} }
+    }
+    chars.forEach(c => {
+      if (!c.box) return;
+      c.box.addEventListener('click', () => poke(c));
+      c.box.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); poke(c); } });
+    });
+
+    // Staggered initial greetings
+    setTimeout(() => say(uul), 800);
+    setTimeout(() => say(bot), 1500);
+    setTimeout(() => say(gear), 2200);
+
+    /* ---------- Main rAF Animation Loop ---------- */
+    let prev = performance.now(), t0 = prev;
+    function frame(now) {
+      const dt = Math.min(.05, (now - prev) / 1000) || .016; prev = now;
+      const ms = now - t0;
+      const idle = now - lastInput > 3500;
+
+      // Scroll impulse -> springs & velocity
+      const dy = pendingDy; pendingDy = 0;
+      scrollVel += (dy / dt - scrollVel) * Math.min(1, dt * 10);
+      const sv = clamp(dy, -60, 60);
+      if (!reduce && sv) {
+        uul.sp.v += -sv * 9; bot.sp.v += -sv * 13; gear.sp.v += -sv * 7;
+        uul.tilt.v += sv * 1.6; bot.tilt.v += -sv * 2.2;
+        bot.ant.v += sv * 12;
+        uul.hair.v += -sv * 7;
+      }
+
+      // Gear rotation: idle spin + scroll-driven
+      const targetOmega = 24 + (reduce ? 0 : scrollVel * .42);
+      gear.omega += (targetOmega - gear.omega) * Math.min(1, dt * 3.2);
+      gear.angle = (gear.angle + gear.omega * dt) % 360;
+      gear.dizzy += ((Math.abs(gear.omega) > 420 ? 1 : 0) - gear.dizzy) * Math.min(1, dt * 4);
+
+      for (let i = 0; i < chars.length; i++) {
+        const c = chars[i];
+        if (!c.box) continue;
+        const svgEl = c.box.querySelector('svg');
+        if (!svgEl) continue;
+        const r = svgEl.getBoundingClientRect();
+
+        // Gaze target
+        let tx = mx, ty = my;
+        if (idle) {
+          tx = innerWidth * (.5 + Math.sin(ms / 1900 + i * 2) * .35);
+          ty = innerHeight * (.35 + Math.cos(ms / 2300 + i) * .2);
+        }
+        const ex = r.left + r.width * c.ax, ey = r.top + r.height * c.ay;
+        const vx = tx - ex, vy = ty - ey, dist = Math.hypot(vx, vy) || 1;
+        const k = clamp(dist / 160, 0, 1);
+        let gx = vx / dist * c.r * k, gy = vy / dist * c.r * k;
+        if (c === gear && gear.dizzy > .02) {
+          const a = ms / 90;
+          gx += Math.cos(a) * c.r * .8 * gear.dizzy; gy += Math.sin(a) * c.r * .8 * gear.dizzy;
+        }
+        const f = 1 - Math.exp(-dt * 16);
+        c.look.x += (gx - c.look.x) * f; c.look.y += (gy - c.look.y) * f;
+        const lx = c.look.x.toFixed(2), ly = c.look.y.toFixed(2);
+        if (c.eyes[0]) c.eyes[0].setAttribute('transform', 'translate(' + lx + ' ' + ly + ')');
+        if (c.eyes[1]) c.eyes[1].setAttribute('transform', 'translate(' + lx + ' ' + ly + ')');
+
+        // Blink
+        if (c.blinkAt < 0 && ms > c.nextBlink) c.blinkAt = ms;
+        if (c.blinkAt >= 0) {
+          const p = (ms - c.blinkAt) / 150;
+          if (p >= 1) { c.blink = 1; c.blinkAt = -1; c.nextBlink = ms + 1800 + Math.random() * 3200; }
+          else c.blink = 1 - Math.sin(p * Math.PI) * .92;
+        }
+        if (c.lids[0]) c.lids[0].setAttribute('transform', 'scale(1 ' + c.blink.toFixed(3) + ')');
+        if (c.lids[1]) c.lids[1].setAttribute('transform', 'scale(1 ' + c.blink.toFixed(3) + ')');
+
+        // Head tilt toward pointer
+        const lean = clamp(vx / 420, -1, 1);
+        stepSpring(c.tilt, dt);
+        stepSpring(c.sp, dt);
+        c.mood *= Math.exp(-dt * 2.2);
+
+        // Character bounce + squash/stretch
+        const y = clamp(c.sp.x, -60, 40);
+        const sq = clamp(-y / 260, -.14, .18);
+        c.box.style.transform = 'translate3d(0,' + y.toFixed(2) + 'px,0) scale(' + (1 - sq * .6).toFixed(3) + ',' + (1 + sq).toFixed(3) + ')';
+        if (c.shadow) {
+          c.shadow.style.transform = 'scale(' + clamp(1 + y / 160, .6, 1.1).toFixed(3) + ')';
+          c.shadow.style.opacity = clamp(1 + y / 120, .4, 1).toFixed(2);
+        }
+        c._lean = lean;
+      }
+
+      // Uul specific springs
+      stepSpring(uul.hair, dt);
+      const breathe = Math.sin(ms / 900) * .012;
+      const headRot = uul._lean * 7 + uul.tilt.x * .35;
+      const nod = clamp(uul.sp.x * .08, -4, 4);
+      const uHead = $('uulHead');
+      const uHair = $('uulHair');
+      const uBody = $('uulBody');
+      const uBrows = $('uulBrows');
+      const uMouth = $('uulMouth');
+
+      if (uHead) uHead.setAttribute('transform', 'translate(' + (uul._lean * 3).toFixed(2) + ' ' + nod.toFixed(2) + ') rotate(' + headRot.toFixed(2) + ' 100 160)');
+      if (uHair) uHair.setAttribute('transform', 'rotate(' + clamp(uul.hair.x * .25 - uul._lean * 2, -9, 9).toFixed(2) + ' 100 80) translate(0 ' + (-clamp(uul.hair.x * .06, -2, 3) + uul.mood * -2).toFixed(2) + ')');
+      if (uBody) uBody.setAttribute('transform', 'scale(' + (1 + breathe).toFixed(4) + ' ' + (1 + breathe * 1.6).toFixed(4) + ')');
+      if (uBrows) uBrows.setAttribute('transform', 'translate(0 ' + (-uul.mood * 5).toFixed(2) + ')');
+      if (uMouth) uMouth.setAttribute('transform', 'scale(' + (1 + uul.mood * .12).toFixed(3) + ' ' + (1 + uul.mood * .25).toFixed(3) + ')');
+
+      // Bot specific springs
+      stepSpring(bot.ant, dt);
+      const bAnt = $('botAnt');
+      const bArmL = $('botArmL');
+      const bArmR = $('botArmR');
+      const bBody = $('botBody');
+      const bMouth = $('botMouth');
+      const bTyping = $('botTyping');
+
+      if (bAnt) bAnt.setAttribute('transform', 'rotate(' + clamp(bot.ant.x * .5 + bot._lean * 6, -28, 28).toFixed(2) + ' 80 52)');
+      const arm = clamp(bot.sp.x * .9, -30, 30) + Math.sin(ms / 420) * 3;
+      if (bArmL) bArmL.setAttribute('transform', 'rotate(' + (-arm - bot.mood * 40).toFixed(2) + ' 26 112)');
+      if (bArmR) bArmR.setAttribute('transform', 'rotate(' + (arm + bot.mood * 40).toFixed(2) + ' 134 112)');
+      if (bBody) bBody.setAttribute('transform', 'rotate(' + clamp(bot.tilt.x * .3 + bot._lean * 3, -8, 8).toFixed(2) + ' 80 165)');
+      if (bMouth) bMouth.setAttribute('transform', 'scale(' + (1 + bot.mood * .35).toFixed(3) + ' ' + (1 + bot.mood * .9).toFixed(3) + ')');
+      if (bTyping) bTyping.setAttribute('transform', 'translate(0 ' + (Math.sin(ms / 500) * 2 - bot.mood * 3).toFixed(2) + ')');
+
+      // Gear specific springs
+      const gBody = $('gearBody');
+      const gFace = $('gearFace');
+      const gMouth = $('gearMouth');
+      if (gBody) gBody.setAttribute('transform', 'rotate(' + gear.angle.toFixed(2) + ' 80 80)');
+      if (gFace) gFace.setAttribute('transform', 'rotate(' + clamp(gear._lean * 5 + Math.sin(ms / 700) * 1.5, -9, 9).toFixed(2) + ' 80 80)');
+      if (gMouth) gMouth.setAttribute('transform', 'scale(' + (1 - gear.dizzy * .25 + gear.mood * .3).toFixed(3) + ' ' + (1 + gear.mood * .6 + gear.dizzy * .5).toFixed(3) + ')');
+
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  })();
+  </script>
+
+  <script>
+
+    function setChat(type) {
+      const u = document.getElementById('cUser');
+      const b = document.getElementById('cBot');
+      if (type === 'promo') {
+        u.innerText = '"Halo kak, susu oatmilk 1L ada yang promo hari ini?"';
+        b.innerText = '"Halo Kak! Ada dong, Oatside Barista 1L lagi promo Rp 38.500 dari Rp 45.000. Stok sisa 12 pcs di gudang. Mau dibungkus kak? Bisa kirim instan sekarang 😊"';
+      } else if (type === 'stok') {
+        u.innerText = '"Kak mau ambil kemeja linen warna sage size XL 3 pcs ada?"';
+        b.innerText = '"Siap kak! Setelah dicek di sistem, Linen Sage size XL ready 5 pcs. Total Rp 375.000 (diskon ambil 3 pcs). Mau dikirim ke alamat mana kak?"';
+      } else if (type === 'ongkir') {
+        u.innerText = '"Kalau kirim ke Buah Batu Bandung ongkirnya berapa ya?"';
+        b.innerText = '"Untuk pengiriman ke Buah Batu, Bandung: Regular JNE Rp 11.000 (1-2 hari sampai) atau SiCepat Gokil Rp 9.000 kak. Mau pakai yang mana?"';
+      }
+    }
+  </script>
+</body>
+</html>

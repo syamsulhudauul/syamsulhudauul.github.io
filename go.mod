@@ -1,6 +1,6 @@
 module github.com/syamsulhudauul/syamsulhudauul.github.io
 
-go 1.24
+go 1.22
 
 require (
 	github.com/yuin/goldmark v1.7.8

@@ -10,7 +10,7 @@ pass() { printf '  \033[32mok\033[0m   %s\n' "$*"; }
 warn() { printf '  \033[33mwarn\033[0m %s\n' "$*"; }
 
 echo "== build"
-if go vet ./... && go run ./cmd/build >/dev/null 2>&1; then
+if go vet ./... && CGO_ENABLED=0 go run ./cmd/build >/dev/null 2>&1; then
   pass "site builds"
 else
   fail "build or vet failed — run 'make check' for detail"
