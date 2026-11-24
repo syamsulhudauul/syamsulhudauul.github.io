@@ -1,31 +1,19 @@
 /* Portfolio — single stylesheet, no framework, no build step. */
 
 :root {
-  --bg: #0b0d10;
-  --bg-soft: #12151a;
-  --card: #14181e;
-  --line: #232a33;
-  --text: #e6e9ee;
-  --muted: #97a1b0;
-  --accent: #5ee6a8;
-  --accent-ink: #05140d;
+  color-scheme: light;
+  --bg: #fffdf9;
+  --bg-soft: #f3f1e9;
+  --card: #ffffff;
+  --line: #dfded5;
+  --text: #17231d;
+  --muted: #526158;
+  --accent: #147d52;
+  --accent-ink: #ffffff;
   --radius: 14px;
   --maxw: 1080px;
   --font: ui-sans-serif, -apple-system, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg: #fbfbfa;
-    --bg-soft: #f2f3f1;
-    --card: #ffffff;
-    --line: #e2e4e0;
-    --text: #14171c;
-    --muted: #5c6672;
-    --accent: #0f7f57;
-    --accent-ink: #ffffff;
-  }
 }
 
 * { box-sizing: border-box; }
@@ -47,8 +35,8 @@ body::before {
   content: "";
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle 800px at 50% 0%, rgba(94, 230, 168, 0.045), transparent 70%),
-              radial-gradient(circle 600px at 80% 60%, rgba(99, 102, 241, 0.025), transparent 70%);
+  background: radial-gradient(circle 800px at 50% 0%, rgba(20, 125, 82, 0.07), transparent 70%),
+              radial-gradient(circle 600px at 85% 58%, rgba(222, 166, 70, 0.06), transparent 70%);
   pointer-events: none;
   z-index: -1;
 }
@@ -162,16 +150,16 @@ section:first-child { border-top: 0; }
 .cards-sm { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 .card {
   display: flex; flex-direction: column;
-  background: radial-gradient(400px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(94, 230, 168, 0.08), transparent 45%), var(--card);
+  background: radial-gradient(400px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(20, 125, 82, 0.07), transparent 45%), var(--card);
   border: 1px solid var(--line); border-radius: var(--radius);
   padding: 1.4rem; text-decoration: none;
   position: relative;
   transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
 }
 .card:hover {
-  border-color: rgba(94, 230, 168, 0.5);
+  border-color: rgba(20, 125, 82, 0.38);
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(94, 230, 168, 0.15);
+  box-shadow: 0 12px 32px -10px rgba(23, 35, 29, 0.16), 0 0 20px -5px rgba(20, 125, 82, 0.1);
 }
 .card p { color: var(--muted); font-size: 0.95rem; }
 .card-top {
@@ -198,20 +186,20 @@ section:first-child { border-top: 0; }
   background: var(--bg-soft);
   transition: border-color 0.15s ease, color 0.15s ease;
 }
-.card:hover .tags li { border-color: rgba(94, 230, 168, 0.3); color: var(--text); }
+.card:hover .tags li { border-color: rgba(20, 125, 82, 0.25); color: var(--text); }
 .tags-lg li { font-size: 0.88rem; padding: 0.35rem 0.75rem; }
 
 /* ---------- services / process ---------- */
 .services { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
 .service {
-  background: radial-gradient(400px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(94, 230, 168, 0.08), transparent 45%), var(--card);
+  background: radial-gradient(400px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(20, 125, 82, 0.07), transparent 45%), var(--card);
   border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem;
   transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
 }
 .service:hover {
-  border-color: rgba(94, 230, 168, 0.45);
+  border-color: rgba(20, 125, 82, 0.35);
   transform: translateY(-3px);
-  box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.4), 0 0 18px -5px rgba(94, 230, 168, 0.12);
+  box-shadow: 0 10px 28px -10px rgba(23, 35, 29, 0.14), 0 0 18px -5px rgba(20, 125, 82, 0.09);
 }
 .service p { color: var(--muted); font-size: 0.95rem; }
 .deliver { font-size: 0.84rem; color: var(--muted); margin: 0; border-top: 1px solid var(--line); padding-top: 0.8rem; }
@@ -298,11 +286,11 @@ section:first-child { border-top: 0; }
 /* ---------- interactive architecture pipeline ---------- */
 .interactive-pipeline {
   margin-top: 2.8rem;
-  background: radial-gradient(600px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(94, 230, 168, 0.08), transparent 45%), var(--card);
+  background: radial-gradient(600px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(20, 125, 82, 0.07), transparent 45%), var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.4rem 1.6rem;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px -10px rgba(23, 35, 29, 0.14);
   position: relative;
   overflow: hidden;
 }
@@ -334,7 +322,7 @@ section:first-child { border-top: 0; }
   background: var(--accent);
   color: var(--accent-ink);
   border-color: var(--accent);
-  box-shadow: 0 0 14px rgba(94, 230, 168, 0.35);
+  box-shadow: 0 0 14px rgba(20, 125, 82, 0.18);
   transform: translateY(-1px);
 }
 .trace-btn[aria-disabled] {
@@ -384,8 +372,8 @@ section:first-child { border-top: 0; }
   .proof dt { font-size: clamp(0.88rem, 4vw, 1.25rem); }
   .proof dd { font-size: 0.76rem; line-height: 1.4; }
   .topbar .mark, .topbar nav a { display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap; }
-  .topbar { gap: 0.6rem; padding-block: 0.35rem; }
-  .topbar nav { gap: clamp(0.45rem, 2vw, 0.8rem); font-size: 0.85rem; }
+  .topbar { flex-wrap: wrap; gap: 0.25rem 0.6rem; padding-block: 0.35rem; }
+  .topbar nav { order: 3; flex: 1 0 100%; width: 100%; justify-content: space-between; gap: 0.35rem; font-size: 0.82rem; }
   .topbar .nav-cta { padding-inline: 0.65rem; }
   .btn { flex: 1 1 auto; text-align: center; }
 }

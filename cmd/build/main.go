@@ -180,6 +180,11 @@ func build() error {
 	if err := copyTree(staticDir, filepath.Join(outDir, "static")); err != nil {
 		return err
 	}
+	// Publish the standalone consulting page at a clean root-level URL while
+	// keeping its source and static assets together under static/bisnis/.
+	if err := copyTree(filepath.Join(staticDir, "bisnis"), filepath.Join(outDir, "bisnis")); err != nil {
+		return err
+	}
 	if err := writeSitemap(site, works); err != nil {
 		return err
 	}
@@ -392,6 +397,7 @@ func writeSitemap(s Site, works []Work) error {
 	b.WriteString(`<?xml version="1.0" encoding="UTF-8"?>` + "\n")
 	b.WriteString(`<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` + "\n")
 	fmt.Fprintf(&b, "  <url><loc>%s/</loc></url>\n", s.BaseURL)
+	fmt.Fprintf(&b, "  <url><loc>%s/bisnis/</loc></url>\n", s.BaseURL)
 	for _, w := range works {
 		fmt.Fprintf(&b, "  <url><loc>%s%s</loc></url>\n", s.BaseURL, w.URL)
 	}
