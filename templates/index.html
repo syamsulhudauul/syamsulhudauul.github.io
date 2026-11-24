@@ -2,14 +2,40 @@
 
 <main>
 <section class="hero">
-  {{if .Site.Available}}<p class="badge"><span class="dot"></span>{{.Site.AvailabilityNote}}</p>{{end}}
-  <h1>{{.Site.Tagline}}</h1>
-  <p class="lede">{{.Site.Intro}}</p>
-  <div class="btn-row">
-    {{with mailto .Site.Contact}}<a class="btn btn-primary" href="{{.}}">Start a project</a>{{end}}
-    <a class="btn btn-ghost" href="#work">View selected work</a>
-    {{with waLink .Site.Contact}}<a class="btn" href="{{.}}" rel="noopener">WhatsApp</a>{{end}}
-    {{with .Site.Contact.ChatDemo}}<a class="btn btn-ghost" href="{{.}}" rel="noopener">{{$.Site.Contact.ChatDemoLabel}} &rarr;</a>{{end}}
+  <div class="hero-grid">
+    <div class="hero-copy">
+      {{if .Site.Available}}<p class="badge"><span class="dot"></span>{{.Site.AvailabilityNote}}</p>{{end}}
+      <h1>{{.Site.Tagline}}</h1>
+      <p class="lede">{{.Site.Intro}}</p>
+      <div class="btn-row">
+        {{with mailto .Site.Contact}}<a class="btn btn-primary" href="{{.}}">Start a project</a>{{end}}
+        <a class="btn btn-ghost" href="#work">View selected work</a>
+        {{with waLink .Site.Contact}}<a class="btn" href="{{.}}" rel="noopener">WhatsApp</a>{{end}}
+        {{with .Site.Contact.ChatDemo}}<a class="btn btn-ghost" href="{{.}}" rel="noopener">{{$.Site.Contact.ChatDemoLabel}} &rarr;</a>{{end}}
+      </div>
+    </div>
+
+    <figure class="signal-visual" id="signalVisual" aria-labelledby="signalCaption">
+      <div class="signal-toolbar">
+        <figcaption id="signalCaption">A system, seen as connected signals</figcaption>
+        <button class="signal-toggle" id="signalToggle" type="button" aria-controls="signalArt" aria-pressed="false" hidden>Spread signals</button>
+      </div>
+      <svg class="signal-art" id="signalArt" viewBox="0 0 480 340" aria-hidden="true" focusable="false">
+        <path class="signal-route route-a" d="M54 182 C94 72 160 65 230 166 S354 281 426 140" />
+        <path class="signal-route route-b" d="M54 182 C112 284 174 286 230 166 S342 43 426 140" />
+        <path class="signal-route route-c" d="M112 87 C146 170 160 225 230 166 S330 121 365 249" />
+        <g class="signal-node node-a"><circle class="node-halo" cx="54" cy="182" r="25"/><circle class="node-core" cx="54" cy="182" r="8"/></g>
+        <g class="signal-node node-b"><circle class="node-halo" cx="112" cy="87" r="21"/><circle class="node-core" cx="112" cy="87" r="7"/></g>
+        <g class="signal-node node-c"><circle class="node-halo" cx="230" cy="166" r="34"/><circle class="node-core" cx="230" cy="166" r="12"/></g>
+        <g class="signal-node node-d"><circle class="node-halo" cx="365" cy="249" r="22"/><circle class="node-core node-warm" cx="365" cy="249" r="8"/></g>
+        <g class="signal-node node-e"><circle class="node-halo" cx="426" cy="140" r="27"/><circle class="node-core" cx="426" cy="140" r="9"/></g>
+        <circle class="signal-spark spark-a" cx="147" cy="125" r="3.5"/>
+        <circle class="signal-spark spark-b" cx="313" cy="212" r="3"/>
+        <circle class="signal-spark spark-c" cx="325" cy="93" r="3.5"/>
+      </svg>
+      <p class="signal-legend">Request <span>·</span> Context <span>·</span> Tools <span>·</span> Response</p>
+      <p class="sr-only" id="signalStatus" role="status" aria-live="polite">The signals are connected.</p>
+    </figure>
   </div>
   {{with .Site.Proof}}
   <dl class="proof">

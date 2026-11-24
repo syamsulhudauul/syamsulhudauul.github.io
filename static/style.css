@@ -77,6 +77,12 @@ section:first-child { border-top: 0; }
 
 /* ---------- hero ---------- */
 .hero { padding-top: 3.5rem; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.88fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3.25rem);
+}
 .hero h1 {
   max-width: 18ch;
   background: linear-gradient(135deg, var(--text) 30%, color-mix(in srgb, var(--text) 60%, var(--accent)) 85%, var(--accent) 100%);
@@ -84,6 +90,96 @@ section:first-child { border-top: 0; }
   -webkit-text-fill-color: transparent;
 }
 .lede { font-size: 1.13rem; color: var(--muted); max-width: 62ch; }
+
+/* A small, original signal-map motif: connected nodes that can be spread and rejoined. */
+.signal-visual {
+  min-width: 0;
+  margin: 0;
+  padding: 1.1rem 1.15rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(20, 125, 82, 0.09), transparent 56%),
+    linear-gradient(145deg, #fffefa, #f4f3eb);
+  box-shadow: 0 18px 48px -34px rgba(23, 35, 29, 0.32);
+  overflow: hidden;
+}
+.signal-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.signal-toolbar figcaption {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.signal-toggle {
+  min-height: 38px;
+  padding: 0.42rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--line));
+  border-radius: 999px;
+  background: #fffefa;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.signal-toggle:hover { background: var(--accent); color: var(--accent-ink); transform: translateY(-1px); }
+.signal-toggle:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 48%, transparent); outline-offset: 3px; }
+.signal-art { display: block; width: 100%; height: auto; margin: 0.15rem auto 0; overflow: visible; }
+.signal-route {
+  fill: none;
+  stroke: color-mix(in srgb, var(--accent) 62%, white);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 3 10;
+  transition: opacity 0.45s ease;
+}
+.route-b { stroke: #d7a862; stroke-opacity: 0.55; stroke-dasharray: 2 12; }
+.route-c { stroke-width: 1.4; stroke-opacity: 0.46; stroke-dasharray: 1 9; }
+.signal-node { transform-box: fill-box; transform-origin: center; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.node-halo { fill: rgba(20, 125, 82, 0.09); stroke: rgba(20, 125, 82, 0.18); stroke-width: 1; }
+.node-core { fill: var(--accent); stroke: #fffefa; stroke-width: 3; }
+.node-warm { fill: #d7a862; }
+.signal-spark { fill: #d7a862; opacity: 0.8; transform-box: fill-box; transform-origin: center; }
+.signal-visual.is-in-view .node-a .node-halo,
+.signal-visual.is-in-view .node-c .node-halo,
+.signal-visual.is-in-view .node-e .node-halo { animation: signal-breathe 4s ease-in-out infinite; }
+.signal-visual.is-in-view .node-c .node-halo { animation-delay: -1.3s; }
+.signal-visual.is-in-view .node-e .node-halo { animation-delay: -2.6s; }
+.signal-visual.is-in-view .signal-route { animation: signal-flow 24s linear infinite; }
+.signal-visual.is-scattered .signal-route { opacity: 0.16; }
+.signal-visual.is-scattered .node-a { transform: translate(-20px, 17px); }
+.signal-visual.is-scattered .node-b { transform: translate(-12px, -20px); }
+.signal-visual.is-scattered .node-c { transform: translate(0, 18px); }
+.signal-visual.is-scattered .node-d { transform: translate(20px, 15px); }
+.signal-visual.is-scattered .node-e { transform: translate(18px, -18px); }
+.signal-visual.is-scattered .spark-a { transform: translate(-15px, 16px); }
+.signal-visual.is-scattered .spark-b { transform: translate(17px, -12px); }
+.signal-visual.is-scattered .spark-c { transform: translate(9px, 16px); }
+.signal-legend {
+  margin: -0.4rem 0 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  text-align: center;
+  letter-spacing: 0.015em;
+}
+.signal-legend span { color: var(--accent); padding: 0 0.2rem; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@keyframes signal-breathe { 50% { opacity: 0.5; transform: scale(1.13); } }
+@keyframes signal-flow { to { stroke-dashoffset: -52; } }
 
 .badge {
   display: inline-flex; align-items: center; gap: 0.6rem;
@@ -363,6 +459,11 @@ section:first-child { border-top: 0; }
   .pipeline-steps { grid-template-columns: 1fr; }
 }
 
+@media (max-width: 760px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 1.8rem; }
+  .signal-visual { width: 100%; max-width: 560px; justify-self: center; }
+}
+
 @media (max-width: 560px) {
   body { font-size: 16px; }
   .hero { padding-top: 2rem; }
@@ -376,6 +477,10 @@ section:first-child { border-top: 0; }
   .topbar nav { order: 3; flex: 1 0 100%; width: 100%; justify-content: space-between; gap: 0.35rem; font-size: 0.82rem; }
   .topbar .nav-cta { padding-inline: 0.65rem; }
   .btn { flex: 1 1 auto; text-align: center; }
+  .signal-visual { padding: 0.85rem 0.8rem 0.75rem; border-radius: 18px; }
+  .signal-toolbar figcaption { font-size: 0.61rem; }
+  .signal-toggle { min-height: 40px; padding-inline: 0.6rem; font-size: 0.72rem; }
+  .signal-legend { font-size: 0.7rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

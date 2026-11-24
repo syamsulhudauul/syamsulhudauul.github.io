@@ -5,6 +5,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   initSpotlight();
+  initSignalMap();
   initScrollReveal();
   initPipelineSimulator();
 });
@@ -24,13 +25,39 @@ function initSpotlight() {
   });
 }
 
-/* 2. Scroll-Triggered Reveal with Stagger */
+/* 2. Low-cost, accessible hero signal map; CSS handles motion, no frame loop. */
+function initSignalMap() {
+  const visual = document.getElementById("signalVisual");
+  const button = document.getElementById("signalToggle");
+  const status = document.getElementById("signalStatus");
+  if (!visual || !button || !status) return;
+
+  button.hidden = false;
+  button.addEventListener("click", () => {
+    const scattered = button.getAttribute("aria-pressed") !== "true";
+    visual.classList.toggle("is-scattered", scattered);
+    button.setAttribute("aria-pressed", String(scattered));
+    button.textContent = scattered ? "Reconnect signals" : "Spread signals";
+    status.textContent = scattered ? "The signals are spread apart." : "The signals are connected.";
+  });
+
+  if (!("IntersectionObserver" in window)) {
+    visual.classList.add("is-in-view");
+    return;
+  }
+  const observer = new IntersectionObserver(([entry]) => {
+    visual.classList.toggle("is-in-view", entry.isIntersecting);
+  }, { threshold: 0.05 });
+  observer.observe(visual);
+}
+
+/* 3. Scroll-Triggered Reveal with Stagger */
 function initScrollReveal() {
   // Automatically tag key elements for smooth entrance
   if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const elementsToReveal = document.querySelectorAll(
-    ".hero h1, .hero .lede, .hero .btn-row, .proof, .sec-title, .sec-sub, .card, .service, .process li, .interactive-pipeline"
+    ".hero h1, .hero .lede, .hero .btn-row, .signal-visual, .proof, .sec-title, .sec-sub, .card, .service, .process li, .interactive-pipeline"
   );
 
   elementsToReveal.forEach((el) => {
@@ -52,7 +79,7 @@ function initScrollReveal() {
   elementsToReveal.forEach((el) => observer.observe(el));
 }
 
-/* 3. Example request through the commerce architecture */
+/* 4. Example request through the commerce architecture */
 function initPipelineSimulator() {
   const pipeline = document.getElementById("agentPipeline");
   if (!pipeline) return;
