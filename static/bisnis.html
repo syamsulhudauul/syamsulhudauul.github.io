@@ -48,6 +48,7 @@
       align-items: center;
       gap: 8px;
     }
+    .nav-brand a { color: inherit; }
     .nav-badge {
       font-size: 11px;
       font-weight: 700;
@@ -152,7 +153,7 @@
       white-space: nowrap; box-shadow: 2px 2px 0px #0f172a;
     }
     .label small { color: #64748b; font-weight: 600; }
-    .char:focus-visible .label { border-color: #22c55e; }
+    .char:focus-visible .label { outline: 2px solid #047857; outline-offset: 3px; }
 
     .bubble {
       position: absolute; bottom: calc(100% - 6px); left: 50%; z-index: 15; max-width: 200px;
@@ -168,6 +169,44 @@
     }
     .bubble.on { opacity: 1; transform: translate(-50%, 0) scale(1); }
     @media (hover: hover) { .char:hover .bubble { opacity: 1; transform: translate(-50%, 0) scale(1); } }
+
+    @media (max-width: 530px) {
+      .mascot-stage { padding: 10px 8px 12px; }
+      .stage-tag {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: fit-content;
+        margin: 0 auto;
+        text-align: center;
+        white-space: normal;
+      }
+      .trio {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4px;
+        min-height: 0;
+        padding-top: 3rem;
+      }
+      .char { min-width: 0; }
+      .char.uul svg, .char.bot svg, .char.gear svg { width: 90%; }
+      .label {
+        display: grid;
+        align-content: center;
+        min-height: 44px;
+        padding: 2px 3px;
+        font-size: 10px;
+        text-align: center;
+        line-height: 1.15;
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+      .bubble { max-width: 100%; padding-inline: 4px; font-size: 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
 
     /* SVG animations */
     .wifi path { animation: wifi 1.8s ease-in-out infinite; opacity: .25; }
@@ -460,7 +499,7 @@
     <!-- Nav Bar -->
     <header class="nav">
       <div class="nav-brand">
-        <span>⚡ Syamsul Huda (Uul)</span>
+        <a href="/">⚡ Syamsul Huda (Uul)</a>
       </div>
       <div class="nav-badge">
         Mantan Engineer ByteDance &amp; Tokopedia
@@ -502,7 +541,7 @@
             <clipPath id="clBotEyeR"><circle cx="102" cy="97" r="14"/></clipPath>
           </defs>
           <!-- antenna -->
-          <g id="botAnt" style="transform-origin:80px 52px">
+          <g id="botAnt">
             <rect x="77.5" y="22" width="5" height="34" rx="2.5" fill="#15803d"/>
             <circle cx="80" cy="20" r="8" fill="#fbbf24"/>
             <circle cx="77.5" cy="17.5" r="2.6" fill="#fff" opacity=".7"/>
@@ -511,12 +550,12 @@
             </g>
           </g>
           <!-- arms -->
-          <g id="botArmL" style="transform-origin:26px 112px"><ellipse cx="18" cy="116" rx="11" ry="14" fill="#22c55e"/></g>
+          <g id="botArmL"><ellipse cx="18" cy="116" rx="11" ry="14" fill="#22c55e"/></g>
           <g id="botArmR" style="transform-origin:134px 112px"><ellipse cx="142" cy="116" rx="11" ry="14" fill="#22c55e"/></g>
           <!-- feet -->
           <ellipse cx="56" cy="170" rx="17" ry="9" fill="#15803d"/><ellipse cx="104" cy="170" rx="17" ry="9" fill="#15803d"/>
           <!-- body -->
-          <g id="botBody" style="transform-origin:80px 165px">
+          <g id="botBody">
             <path d="M22 98 Q22 52 80 52 Q138 52 138 98 L138 122 Q138 168 80 168 Q22 168 22 122 Z" fill="url(#gBody)"/>
             <path d="M22 98 Q22 52 80 52 Q138 52 138 98 L138 122 Q138 168 80 168 Q22 168 22 122 Z" fill="url(#gGloss)"/>
             <!-- chat tail -->
@@ -584,7 +623,7 @@
             </g>
           </g>
           <!-- head group (tilt/nod) -->
-          <g id="uulHead" style="transform-origin:100px 160px">
+          <g id="uulHead">
             <ellipse cx="52" cy="112" rx="9" ry="13" fill="#d89870"/><ellipse cx="148" cy="112" rx="9" ry="13" fill="#d89870"/>
             <ellipse cx="52" cy="113" rx="4" ry="7" fill="#c07f58"/><ellipse cx="148" cy="113" rx="4" ry="7" fill="#c07f58"/>
             <!-- face -->
@@ -617,7 +656,7 @@
               <path d="M85 138.5 Q100 144.5 115 138.5 Q113 148 100 149 Q87 148 85 138.5 Z" fill="#fff"/>
             </g>
             <!-- hair (lagging spring) -->
-            <g id="uulHair" style="transform-origin:100px 80px">
+            <g id="uulHair">
               <path d="M46 108 Q36 64 62 48 L56 22 L80 40 L88 10 L104 38 L122 12 L126 42 L148 26 L142 54 Q164 70 154 108 Q150 82 136 74 Q100 62 64 74 Q50 82 46 108 Z" fill="url(#gHair)"/>
               <path d="M70 52 L74 36 L84 48" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="2.5" stroke-linecap="round"/>
               <path d="M108 44 L118 26 L120 44" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="2.5" stroke-linecap="round"/>
@@ -641,7 +680,7 @@
             <clipPath id="clGearEyeL"><circle cx="66" cy="76" r="9"/></clipPath>
             <clipPath id="clGearEyeR"><circle cx="94" cy="76" r="9"/></clipPath>
           </defs>
-          <g id="gearBody" style="transform-origin:80px 80px">
+          <g id="gearBody">
             <path id="gearShade" fill="#b45309" transform="translate(0 4)"/>
             <path id="gearMain" fill="url(#gGold)"/>
             <circle cx="80" cy="80" r="50" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2"/>
@@ -693,9 +732,9 @@
         <div class="demo-box">
           <div class="demo-bar">
             <span>🎮 Coba Interaktif: Simulasi Chat Pelanggan</span>
-            <span>Live Response</span>
+            <span>Contoh percakapan</span>
           </div>
-          <div class="wa-chat">
+          <div class="wa-chat" aria-live="polite" aria-atomic="true">
             <div class="chat-bubble chat-user" id="cUser">"Halo kak, susu oatmilk 1L ada yang promo hari ini?"</div>
             <div class="chat-bubble chat-bot" id="cBot">"Halo Kak! Ada dong, Oatside Barista 1L lagi promo Rp 38.500 dari Rp 45.000. Stok sisa 12 pcs di gudang. Mau dibungkus kak? Bisa kirim instan sekarang 😊"</div>
           </div>
@@ -783,7 +822,7 @@
       <p>
         Setiap bisnis punya tantangan unik. Mari ngobrol santai 30 menit lewat WhatsApp. Saya akan bedah alur operasional Anda dan memberikan solusi AI yang paling cepat menghasilkan efisiensi nyata.
       </p>
-      <a class="btn btn-primary" style="font-size: 15px; padding: 14px 28px;" href="https://wa.me/6281212888355?text=Halo%20Syamsul,%20saya%20mau%20konsultasi%20kebutuhan%20otomasi%20AI%20di%20bisnis%20saya" target="_blank">
+      <a class="btn btn-primary" style="font-size: 15px; padding: 14px 28px;" href="https://wa.me/6281212888355?text=Halo%20Syamsul,%20saya%20mau%20konsultasi%20kebutuhan%20otomasi%20AI%20di%20bisnis%20saya" target="_blank" rel="noopener">
         💬 Chat WhatsApp Syamsul Sekarang
       </a>
     </div>
@@ -912,6 +951,7 @@
       const l = lines[c.box.id];
       idx[c.box.id] = (idx[c.box.id] + 1) % l.length;
       say(c, l[idx[c.box.id]]);
+      if (reduce) return;
       c.sp.v = -520; c.mood = 1;
       if (c.ant) c.ant.v = 900;
       if (c === gear) gear.omega += 700;
@@ -922,6 +962,8 @@
       c.box.addEventListener('click', () => poke(c));
       c.box.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); poke(c); } });
     });
+
+    if (reduce) return;
 
     // Staggered initial greetings
     setTimeout(() => say(uul), 800);
@@ -939,7 +981,7 @@
       const dy = pendingDy; pendingDy = 0;
       scrollVel += (dy / dt - scrollVel) * Math.min(1, dt * 10);
       const sv = clamp(dy, -60, 60);
-      if (!reduce && sv) {
+      if (sv) {
         uul.sp.v += -sv * 9; bot.sp.v += -sv * 13; gear.sp.v += -sv * 7;
         uul.tilt.v += sv * 1.6; bot.tilt.v += -sv * 2.2;
         bot.ant.v += sv * 12;
@@ -947,7 +989,7 @@
       }
 
       // Gear rotation: idle spin + scroll-driven
-      const targetOmega = 24 + (reduce ? 0 : scrollVel * .42);
+      const targetOmega = 24 + scrollVel * .42;
       gear.omega += (targetOmega - gear.omega) * Math.min(1, dt * 3.2);
       gear.angle = (gear.angle + gear.omega * dt) % 360;
       gear.dizzy += ((Math.abs(gear.omega) > 420 ? 1 : 0) - gear.dizzy) * Math.min(1, dt * 4);

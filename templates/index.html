@@ -7,6 +7,7 @@
   <p class="lede">{{.Site.Intro}}</p>
   <div class="btn-row">
     {{with mailto .Site.Contact}}<a class="btn btn-primary" href="{{.}}">Start a project</a>{{end}}
+    <a class="btn btn-ghost" href="#work">View selected work</a>
     {{with waLink .Site.Contact}}<a class="btn" href="{{.}}" rel="noopener">WhatsApp</a>{{end}}
     {{with .Site.Contact.ChatDemo}}<a class="btn btn-ghost" href="{{.}}" rel="noopener">{{$.Site.Contact.ChatDemoLabel}} &rarr;</a>{{end}}
   </div>
@@ -16,45 +17,6 @@
   </dl>
   {{end}}
 
-  <!-- Interactive Architecture Pipeline Simulator -->
-  <div class="interactive-pipeline" id="agentPipeline">
-    <div class="pipeline-header">
-      <div class="pipeline-title">
-        <span class="live-indicator"></span>
-        <span>Interactive Architecture — Live Agent Turn Pipeline</span>
-      </div>
-      <button class="trace-btn" id="runTraceBtn" type="button">▶ Run Live Trace</button>
-    </div>
-    <div class="pipeline-steps">
-      <div class="pipeline-step" data-step="1">
-        <span class="step-num">01</span>
-        <span class="step-name">Guard</span>
-      </div>
-      <span class="step-arrow">&rarr;</span>
-      <div class="pipeline-step" data-step="2">
-        <span class="step-num">02</span>
-        <span class="step-name">Understand</span>
-      </div>
-      <span class="step-arrow">&rarr;</span>
-      <div class="pipeline-step" data-step="3">
-        <span class="step-num">03</span>
-        <span class="step-name">Go ReAct Loop</span>
-      </div>
-      <span class="step-arrow">&rarr;</span>
-      <div class="pipeline-step" data-step="4">
-        <span class="step-num">04</span>
-        <span class="step-name">Hybrid Search (28ms)</span>
-      </div>
-      <span class="step-arrow">&rarr;</span>
-      <div class="pipeline-step" data-step="5">
-        <span class="step-num">05</span>
-        <span class="step-name">Gateway &amp; Eval Gate</span>
-      </div>
-    </div>
-    <div class="pipeline-live-log">
-      <span class="trace-query">&gt; Click &ldquo;Run Live Trace&rdquo; to inspect multi-tool agent execution.</span>
-    </div>
-  </div>
 </section>
 
 <section id="work">

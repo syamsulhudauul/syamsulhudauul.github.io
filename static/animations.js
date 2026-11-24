@@ -27,11 +27,13 @@ function initSpotlight() {
 /* 2. Scroll-Triggered Reveal with Stagger */
 function initScrollReveal() {
   // Automatically tag key elements for smooth entrance
+  if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
   const elementsToReveal = document.querySelectorAll(
     ".hero h1, .hero .lede, .hero .btn-row, .proof, .sec-title, .sec-sub, .card, .service, .process li, .interactive-pipeline"
   );
 
-  elementsToReveal.forEach((el, index) => {
+  elementsToReveal.forEach((el) => {
     el.classList.add("reveal");
   });
 
@@ -50,104 +52,42 @@ function initScrollReveal() {
   elementsToReveal.forEach((el) => observer.observe(el));
 }
 
-/* 3. Interactive Live AI Agent Pipeline Simulation */
+/* 3. Example request through the commerce architecture */
 function initPipelineSimulator() {
   const pipeline = document.getElementById("agentPipeline");
   if (!pipeline) return;
 
   const steps = pipeline.querySelectorAll(".pipeline-step");
-  const logBox = pipeline.querySelector(".pipeline-live-log");
-  const triggerBtn = pipeline.querySelector("#runTraceBtn");
-
-  const traces = [
-    {
-      query: "Cari kopi arabika gayo 250g beans",
-      guard: "Prompt Guard: Safe (0 injection detected)",
-      route: "Go ReAct Agent: parallel tool dispatch [search_catalog, check_stock]",
-      search: "Hybrid ES: BM25 + kNN HNSW (RRF rank, p50: 28ms, NDCG: 0.82)",
-      llm: "LiteLLM Gateway: Gemini / Claude routing (latency: 1.1s, cost: $0.0004)",
-      eval: "CI Eval Gate: 100% assertions satisfied"
-    },
-    {
-      query: "Susu oatmilk barista 1 liter ada promo?",
-      guard: "Prompt Guard: Safe (e-commerce intent verified)",
-      route: "Go ReAct Agent: [search_catalog, fetch_active_promos, check_inventory]",
-      search: "Hybrid ES: Custom Indonesian verb analyzer, p50: 31ms",
-      llm: "LiteLLM Gateway: Stream tokens (TTFT: 240ms, total: 920ms)",
-      eval: "CI Eval Gate: Relevance score 94/100"
-    }
+  const log = pipeline.querySelector(".pipeline-live-log");
+  const button = pipeline.querySelector("#runTraceBtn");
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const messages = [
+    "The gateway accepts the request and opens a streaming connection.",
+    "The orchestrator asks the model which catalogue tool to call.",
+    "The MCP bridge validates the tool arguments and calls the commerce backend.",
+    "The search and inventory services return product and stock information.",
+    "The gateway streams the answer back to the shopper."
   ];
 
-  let traceIndex = 0;
-  let isRunning = false;
+  button.hidden = false;
+  button.addEventListener("click", async () => {
+    if (button.getAttribute("aria-disabled") === "true") return;
+    button.setAttribute("aria-disabled", "true");
+    log.hidden = false;
+    log.textContent = 'Example query: “Susu oatmilk barista 1 liter ada promo?”';
+    steps.forEach(step => step.classList.remove("active", "done"));
 
-  async function runTrace() {
-    if (isRunning) return;
-    isRunning = true;
-    if (triggerBtn) triggerBtn.disabled = true;
-
-    const t = traces[traceIndex % traces.length];
-    traceIndex++;
-
-    // Reset steps
-    steps.forEach((s) => {
-      s.classList.remove("active", "done");
-    });
-
-    if (logBox) logBox.innerHTML = `<span class="trace-query">&gt; Incoming: "${t.query}"</span>`;
-
-    const sequence = [
-      { step: 0, text: t.guard, delay: 350 },
-      { step: 1, text: t.route, delay: 450 },
-      { step: 2, text: t.search, delay: 500 },
-      { step: 3, text: t.llm, delay: 600 },
-      { step: 4, text: t.eval, delay: 400 }
-    ];
-
-    for (let i = 0; i < sequence.length; i++) {
-      const item = sequence[i];
-      if (steps[item.step]) {
-        steps[item.step].classList.add("active");
+    for (const [index, step] of steps.entries()) {
+      step.classList.add("active");
+      const line = document.createElement("div");
+      line.textContent = messages[index];
+      log.append(line);
+      if (!reducedMotion.matches) {
+        await new Promise(resolve => setTimeout(resolve, 350));
       }
-      if (logBox) {
-        const line = document.createElement("div");
-        line.className = "trace-log-line";
-        line.innerHTML = `<span>[Phase ${item.step + 1}]</span> ${item.text}`;
-        logBox.appendChild(line);
-        logBox.scrollTop = logBox.scrollHeight;
-      }
-      await new Promise((r) => setTimeout(r, item.delay));
-      if (steps[item.step]) {
-        steps[item.step].classList.remove("active");
-        steps[item.step].classList.add("done");
-      }
+      step.classList.replace("active", "done");
     }
 
-    if (logBox) {
-      const doneLine = document.createElement("div");
-      doneLine.className = "trace-success";
-      doneLine.innerHTML = `✔ Turn complete. Deterministic, low-latency response dispatched.`;
-      logBox.appendChild(doneLine);
-    }
-
-    isRunning = false;
-    if (triggerBtn) triggerBtn.disabled = false;
-  }
-
-  // Trigger on click
-  if (triggerBtn) {
-    triggerBtn.addEventListener("click", runTrace);
-  }
-
-  // Run automatically once when pipeline enters view
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        runTrace();
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.3 });
-
-  observer.observe(pipeline);
+    button.removeAttribute("aria-disabled");
+  });
 }

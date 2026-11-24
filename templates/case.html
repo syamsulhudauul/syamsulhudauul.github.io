@@ -26,6 +26,24 @@
   </dl>
   {{end}}
 
+  {{if eq .Slug "conversational-commerce-agent"}}
+  <div class="interactive-pipeline" id="agentPipeline">
+    <div class="pipeline-header">
+      <h2>Shopping agent walkthrough</h2>
+      <button class="trace-btn" id="runTraceBtn" type="button" hidden>Run example</button>
+    </div>
+    <p class="sec-sub">Follow a sample catalogue query through the architecture described in this case study.</p>
+    <ol class="pipeline-steps">
+      <li class="pipeline-step">Gateway</li>
+      <li class="pipeline-step">Orchestrator</li>
+      <li class="pipeline-step">MCP bridge</li>
+      <li class="pipeline-step">Commerce services</li>
+      <li class="pipeline-step">Streamed answer</li>
+    </ol>
+    <div class="pipeline-live-log" role="log" hidden></div>
+  </div>
+  {{end}}
+
   <div class="prose">{{.Body}}</div>
 </article>
 
