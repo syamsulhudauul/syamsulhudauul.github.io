@@ -48,6 +48,7 @@
       align-items: center;
       gap: 8px;
     }
+    .nav-brand a { color: inherit; }
     .nav-badge {
       font-size: 11px;
       font-weight: 700;
@@ -57,23 +58,6 @@
       padding: 3px 10px;
       border-radius: 999px;
     }
-
-    .nav-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
-    .lang-toggle {
-      display: inline-flex; border: 2px solid var(--border); border-radius: 999px; overflow: hidden;
-      background: #fff; box-shadow: 2px 2px 0px var(--border); flex-shrink: 0;
-    }
-    .lang-btn { min-height: 44px; min-width: 52px;
-      border: 0; background: transparent; font: inherit; font-size: 11.5px; font-weight: 800;
-      padding: 4px 11px; cursor: pointer; color: var(--text); transition: background .15s ease;
-    }
-    .lang-btn + .lang-btn { min-height: 44px; min-width: 52px; border-left: 2px solid var(--border); }
-    .lang-btn:hover { background: var(--yellow); }
-    .lang-btn[aria-pressed="true"] { background: var(--accent); color: #fff; }
-    [data-i18n] { transition: opacity .14s ease; }
-    .i18n-swap [data-i18n] { opacity: 0; }
-    @media (prefers-reduced-motion: reduce) { [data-i18n] { transition: none; } }
-
 
     /* Hero Section */
     .hero {
@@ -119,43 +103,60 @@
       margin-bottom: 24px;
     }
 
-
-    /* ---------- 3D Mascot Stage (Three.js) ---------- */
+    
+    /* ---------- Modern 3 Mascot Stage (Light Cerah Theme) ---------- */
     .mascot-stage {
       position: relative;
       margin: 20px 0 32px;
       border: 3px solid var(--border);
       border-radius: 24px;
-      height: clamp(290px, 64vw, 400px);
+      padding: 38px 12px 14px;
       background:
-        radial-gradient(70% 60% at 50% 105%, rgba(34,197,94,.16), transparent 70%),
-        radial-gradient(60% 50% at 50% 0%, rgba(254,240,138,.35), transparent 70%),
-        linear-gradient(180deg, #ffffff, #f1f5f9);
+        radial-gradient(120% 90% at 50% 120%, rgba(34,197,94,.12), transparent 60%),
+        linear-gradient(180deg, #ffffff, #f8fafc);
       box-shadow: var(--shadow);
+      touch-action: pan-y;
       overflow: hidden;
     }
-    #stage3d { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; cursor: pointer; }
+    .mascot-stage::before {
+      content: ""; position: absolute; inset: 0; border-radius: inherit; opacity: .45; pointer-events: none;
+      background-image: radial-gradient(rgba(15,23,42,.08) 1px, transparent 1px); background-size: 16px 16px;
+      -webkit-mask-image: radial-gradient(70% 70% at 50% 40%, #000, transparent);
+      mask-image: radial-gradient(70% 70% at 50% 40%, #000, transparent);
+    }
     .stage-tag {
       position: absolute; top: 10px; left: 50%; transform: translateX(-50%); font-size: 10.5px; font-weight: 800;
       letter-spacing: .02em; background: #fef08a; color: #0f172a; border: 1.5px solid #0f172a;
       padding: 3px 14px; border-radius: 999px; white-space: nowrap; box-shadow: 2px 2px 0px #0f172a;
-      z-index: 5; pointer-events: none;
+      z-index: 5;
     }
-    .stage-fallback { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; font-size: 56px; gap: 18px; }
-    .no-webgl .stage-fallback { display: flex; }
-    .no-webgl #stage3d { display: none; }
-    .trio { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); pointer-events: none; }
-    .char { position: relative; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 12px; }
+    .trio {
+      position: relative; display: flex; justify-content: space-around; align-items: flex-end;
+      gap: clamp(4px, 2vw, 18px); min-height: 220px;
+    }
+    .char {
+      position: relative; display: flex; flex-direction: column; align-items: center; cursor: pointer;
+      will-change: transform; transform-origin: 50% 100%; outline: none;
+    }
+    .char svg { display: block; overflow: visible; height: auto; pointer-events: none; }
+    .char.uul svg { width: clamp(104px, 30vw, 168px); }
+    .char.bot svg { width: clamp(84px, 24vw, 134px); }
+    .char.gear svg { width: clamp(78px, 22vw, 124px); }
+    .shadow {
+      width: 70%; height: 10px; margin-top: -4px; border-radius: 50%;
+      background: radial-gradient(closest-side, rgba(15,23,42,.24), transparent);
+      transform-origin: 50% 50%;
+    }
     .label {
-      pointer-events: auto; cursor: pointer; font: inherit; font-size: 11px; font-weight: 800; color: #0f172a;
+      margin-top: 8px; font-size: 11px; font-weight: 800; color: #0f172a;
       background: #ffffff; border: 1.5px solid #0f172a; padding: 3px 10px; border-radius: 999px;
-      white-space: nowrap; box-shadow: 2px 2px 0px #0f172a; outline: none;
+      white-space: nowrap; box-shadow: 2px 2px 0px #0f172a;
     }
     .label small { color: #64748b; font-weight: 600; }
-    .label:focus-visible { border-color: #22c55e; box-shadow: 2px 2px 0 #22c55e; }
-    .label:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 #0f172a; }
+    .char:focus-visible .label { outline: 2px solid #047857; outline-offset: 3px; }
+
     .bubble {
-      position: absolute; left: 50%; top: 8%; z-index: 15; max-width: 170px;
+      position: absolute; bottom: calc(100% - 6px); left: 50%; z-index: 15; max-width: 200px;
       background: #0f172a; color: #ffffff; font-size: 11.5px; font-weight: 800; line-height: 1.35; text-align: center;
       padding: 7px 12px; border-radius: 12px; width: max-content; pointer-events: none;
       opacity: 0; transform: translate(-50%, 8px) scale(.85); transform-origin: 50% 100%;
@@ -167,6 +168,55 @@
       border: 6px solid transparent; border-top-color: #0f172a;
     }
     .bubble.on { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    @media (hover: hover) { .char:hover .bubble { opacity: 1; transform: translate(-50%, 0) scale(1); } }
+
+    @media (max-width: 530px) {
+      .mascot-stage { padding: 10px 8px 12px; }
+      .stage-tag {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: fit-content;
+        margin: 0 auto;
+        text-align: center;
+        white-space: normal;
+      }
+      .trio {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4px;
+        min-height: 0;
+        padding-top: 3rem;
+      }
+      .char { min-width: 0; }
+      .char.uul svg, .char.bot svg, .char.gear svg { width: 90%; }
+      .label {
+        display: grid;
+        align-content: center;
+        min-height: 44px;
+        padding: 2px 3px;
+        font-size: 10px;
+        text-align: center;
+        line-height: 1.15;
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+      .bubble { max-width: 100%; padding-inline: 4px; font-size: 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* SVG animations */
+    .wifi path { animation: wifi 1.8s ease-in-out infinite; opacity: .25; }
+    .wifi path:nth-child(2) { animation-delay: .25s; }
+    .wifi path:nth-child(3) { animation-delay: .5s; }
+    @keyframes wifi { 0%, 100% { opacity: .2; } 40% { opacity: 1; } }
+    .dots circle { animation: typing 1.2s infinite; }
+    .dots circle:nth-child(2) { animation-delay: .15s; }
+    .dots circle:nth-child(3) { animation-delay: .3s; }
+    @keyframes typing { 0%, 60%, 100% { opacity: .3; } 30% { opacity: 1; } }
 
     /* Buttons */
     .btn-row {
@@ -449,529 +499,619 @@
     <!-- Nav Bar -->
     <header class="nav">
       <div class="nav-brand">
-        <span>⚡ Syamsul Huda (Uul)</span>
+        <a href="/">⚡ Syamsul Huda (Uul)</a>
       </div>
-      <div class="nav-right">
-        <div class="nav-badge" data-i18n="auth"></div>
-        <div class="lang-toggle" role="group" aria-label="Language">
-          <button type="button" class="lang-btn" data-lang="id" aria-pressed="true">🇮🇩 ID</button>
-          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">🇬🇧 EN</button>
-        </div>
+      <div class="nav-badge">
+        Mantan Engineer ByteDance &amp; Tokopedia
       </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-badge">
-        <span class="badge-dot"></span> <span data-i18n="heroBadge"></span>
+        <span class="badge-dot"></span> Khusus Bisnis Berkembang di Indonesia · Slot Bulan Ini: 2 Klien
       </div>
-      <h1 data-i18n="h1" data-html></h1>
-      <p class="hero-desc" data-i18n="sub"></p>
+      <h1>
+        Bikin Bisnis Anda Berjalan Otomatis 24/7<br>
+        <span>Tanpa Pusing Nambah Tim Admin.</span>
+      </h1>
+      <p class="hero-desc">
+        Solusi asisten AI privat &amp; otomasi alur kerja khusus pemilik toko, brand, dan UMKM berkembang. Menjawab chat pelanggan instan, memvalidasi bukti transfer, dan merekap pesanan otomatis ke sistem Anda—bahkan saat Anda sedang tidur.
+      </p>
 
-      <!-- ID/EN language switcher -->
-  <script>
-  window.I18N = {"id": {"title": "Syamsul Huda — Solusi AI & Otomasi Alur Bisnis", "auth": "Solusi AI dan otomasi alur bisnis", "heroBadge": "Solusi AI dan otomasi untuk alur kerja bisnis", "h1": "Bikin Bisnis Anda Melayani Pelanggan &amp; Rekap Pesanan Otomatis 24 Jam — <span>Tanpa Tambah Karyawan Admin.</span>", "sub": "Sistem AI privat yang membalas WhatsApp seketika, memvalidasi bukti transfer, dan mencatat pesanan ke Google Sheets atau ERP Anda saat Anda sedang tidur.", "stageTag": "Gerakkan kursor · sentuh · scroll · klik karakter", "bubBot": "Asisten untuk percakapan pelanggan", "bubUul": "Halo! Saya Uul 👋", "bubGear": "Otomasi tanpa capek!", "lblBot": "· WA Sales", "lblUul": "· AI Builder", "lblGear": "· Otomasi", "s1tag": "Layanan 01 · Sales &amp; Customer Support", "s1title": "Chat Pelanggan Dibalas Instan 24 Jam — Dukungan Pelanggan dengan Asisten AI", "s2tag": "Layanan 02 · Alur Kerja &amp; Pembukuan", "s2title": "Hentikan Ketik Ulang Resi &amp; Struk — Pencatatan Pesanan Terbantu", "s3tag": "Layanan 03 · Katalog &amp; E-Commerce", "s3title": "Konsumen Salah Ketik? Produk Tetap Ketemu Seketika", "painH": "⚠️ Omset yang Bocor Tanpa Anda Sadari:", "solH": "✨ Cara Kerja Solusi AI Kami:", "resH": "Hasil Nyata untuk Bisnis Anda:", "s1pain": "Chat pelanggan menumpuk malam hari atau saat hari libur. Respon telat 10 menit saja, calon pembeli sudah checkout di toko sebelah. Rekrut admin shift malam? Gaji membengkak dan sering salah kasih info harga atau stok.", "s1sol": "Kami memasang asisten AI privat yang diajari katalog lengkap, harga promo, dan SOP toko Anda. Menjawab ramah dalam Bahasa Indonesia natural, mengecek stok secara realtime, dan memandu pembeli sampai transfer selesai.", "s1r1": "<strong>Respons otomatis sesuai konfigurasi</strong> tanpa biaya lembur admin malam.", "s1r2": "<strong>Bantu pelanggan menemukan informasi</strong> karena chat telat dibalas saat jam istirahat.", "s1r3": "<strong>Kenaikan omset malam hari &amp; weekend</strong> untuk membantu tim menangani percakapan pelanggan.", "s2pain": "Admin menghabiskan 4–5 jam sehari hanya untuk membaca bukti transfer, mencocokkan mutasi bank, dan menyalin pesanan ke Excel. Melelahkan, rawan salah catat, dan rentan tertipu struk transfer palsu/editan.", "s2sol": "Sistem AI membaca foto bukti transfer, memvalidasi keaslian mutasi rekening, mencatat pesanan otomatis ke Google Sheets atau ERP Anda, dan mengirim konfirmasi nomor resi ke WhatsApp pembeli secara instan.", "s2r1": "<strong>Jam kerja admin manual dapat diotomatisasi sesuai kebutuhan</strong> — tim Anda fokus jualan dan ekspansi.", "s2r2": "<strong>Pemeriksaan bukti transfer dapat dirancang</strong> berkat verifikasi otomatis.", "s2r3": "<strong>Pembukuan dan laporan stok selalu sinkron</strong> setiap detik tanpa selisih.", "s3pain": "Konsumen mengetik typo (misal: \"kaos ovrsiz\" atau \"sepatu sneaker pth\") lalu toko Anda menampilkan <em>\"Produk Tidak Ditemukan\"</em>. Pembeli mengira stok kosong dan pindah ke toko lain.", "s3sol": "Algoritma pencarian cerdas yang memahami konteks, typo, dan sinonim kata bahasa Indonesia sehari-hari. Produk paling relevan selalu tampil di urutan teratas seketika.", "s3r1": "<strong>Kenaikan omset transaksi </strong> (berdasarkan evaluasi yang sesuai dengan kebutuhan).", "s3r2": "<strong>Mencegah pembeli kabur</strong> karena pencarian toko online Anda tidak pernah zonk.", "s3r3": "<strong>Pengalaman belanja cepat</strong> yang membuat pelanggan belanja berulang kali (repeat order).", "demoBar": "🎮 Coba Interaktif: Simulasi Chat Pelanggan", "demoLive": "Live Response", "chipPromo": "Coba: Tanya Promo", "chipStok": "Coba: Cek Ketersediaan Stok", "chipOngkir": "Coba: Cek Ongkir ke Bandung", "t1": "🛡️ Data Privasi dibahas sesuai kebutuhan", "t2": "⚙️ Kustom Sesuai Alur Toko Anda", "t3": "🤝 Ruang lingkup kerja dibahas bersama", "ctaH": "Punya Alur Kerja yang Ingin Diotomatisasi?", "ctaP": "Setiap bisnis punya tantangan unik. Mari ngobrol santai 30 menit lewat WhatsApp. Saya akan bedah alur operasional Anda dan memberikan solusi AI yang paling cepat menghasilkan efisiensi nyata.", "ctaBtn": "💬 Chat WhatsApp Syamsul Sekarang", "waText": "Halo Syamsul, saya mau konsultasi kebutuhan otomasi AI di bisnis saya", "chat": {"promo": ["Halo kak, susu oatmilk 1L ada yang promo hari ini?", "Halo Kak! Ada dong, Oatside Barista 1L lagi promo detail promo dan stok mengikuti data toko. Mau dibungkus kak? Bisa kirim instan sekarang 😊"], "stok": ["Kak mau ambil kemeja linen warna sage size XL 3 pcs ada?", "Siap kak! Setelah dicek di sistem, Linen Sage size XL ready 5 pcs. Total total harga dihitung dari katalog. Mau dikirim ke alamat mana kak?"], "ongkir": ["Kalau kirim ke Buah Batu Bandung ongkirnya berapa ya?", "Untuk pengiriman ke Buah Batu, Bandung: tarif dan estimasi bergantung tujuan dan layanan. kak. Mau pakai yang mana?"]}, "lines": {"uul": ["Halo! Saya Syamsul (Uul) 👋", "Punya alur kerja yang ribet? Ceritakan!", "Kita bangun sistem AI privat untuk bisnismu 🚀", "Hehe, geli disentuh! 😄"], "bot": ["CS 24 jam nonstop! 💬", "Pesan masuk? Langsung saya balas kilat ⚡", "Ting! Pesanan & lead baru masuk 🛒", "Ayo ngobrol di WhatsApp!"], "gear": ["Rekap resi & data jalan sendiri ⚙️", "Kerja berulang beres tanpa capek!", "Wuuush… pusing kalau scroll kencang 🌀", "Tugas berulang? Serahkan ke saya."]}}, "en": {"title": "Syamsul Huda — AI & Business Workflow Automation", "auth": "AI and business workflow automation", "heroBadge": "AI and automation for business workflows", "h1": "Run Your Customer Inquiries &amp; Order Processing 24/7 on Autopilot — <span>Without Adding Admin Overhead.</span>", "sub": "Private AI automation that instantly replies to customer WhatsApp chats, verifies transfer slips, and syncs orders directly to your Google Sheets or ERP while you sleep.", "stageTag": "Move cursor · touch · scroll · tap a character", "bubBot": "Support for customer conversations", "bubUul": "Hi! I'm Uul 👋", "bubGear": "Automation without burnout!", "lblBot": "· WA Sales", "lblUul": "· AI Builder", "lblGear": "· Automation", "s1tag": "Service 01 · Sales &amp; Customer Support", "s1title": "Customer Chats Answered Instantly, 24/7 — AI Support for Customer Conversations", "s2tag": "Service 02 · Workflow &amp; Bookkeeping", "s2title": "Stop Retyping Receipts &amp; Slips — Assisted Order Logging", "s3tag": "Service 03 · Catalog &amp; E-Commerce", "s3title": "Customer Made a Typo? They Still Find the Product Instantly", "painH": "⚠️ Revenue Leaking Without You Noticing:", "solH": "✨ How Our AI Solution Works:", "resH": "Real Results for Your Business:", "s1pain": "Chats pile up at night and on holidays. Reply 10 minutes late and the buyer has already checked out at a competitor. Hiring a night-shift admin? Payroll balloons and wrong price or stock info slips through.", "s1sol": "We deploy a private AI assistant trained on your full catalog, promo pricing, and store SOPs. It replies in a natural, friendly tone, checks stock in real time, and guides buyers all the way to payment.", "s1r1": "<strong>Automated replies configured for your workflow</strong> with zero night-shift overtime cost.", "s1r2": "<strong>Help customers find information</strong> to slow replies during off-hours.", "s1r3": "<strong>Night &amp; weekend revenue up</strong> 20%–35%, consistently.", "s2pain": "Admins burn 4–5 hours a day just reading transfer slips, matching bank statements, and copying orders into Excel. Exhausting, error-prone, and easy to fool with fake or edited slips.", "s2sol": "The AI reads transfer slip photos, validates the bank transaction, logs orders automatically to your Google Sheets or ERP, and instantly sends the tracking number to the buyer on WhatsApp.", "s2r1": "<strong>Manual admin hours can be automated to fit your workflow</strong> — your team focuses on selling and growth.", "s2r2": "<strong>Transfer-slip checks can be designed</strong> thanks to automated verification.", "s2r3": "<strong>Books and stock reports stay in sync</strong> every second, no discrepancies.", "s3pain": "Customers type typos (e.g. \"oversize tee\" as \"kaos ovrsiz\") and your store shows <em>\"No Products Found\"</em>. They assume it's out of stock and leave for another shop.", "s3sol": "A smart search engine that understands context, typos, and everyday Indonesian synonyms. The most relevant products always appear at the top, instantly.", "s3r1": "<strong></strong> based on an evaluation tailored to your needs.", "s3r2": "<strong>Stops buyers from bouncing</strong> because your store search never comes up empty.", "s3r3": "<strong>A fast shopping experience</strong> that keeps customers coming back (repeat orders).", "demoBar": "🎮 Try It: Customer Chat Simulation", "demoLive": "Live Response", "chipPromo": "Try: Ask About Promos", "chipStok": "Try: Check Stock", "chipOngkir": "Try: Shipping to Bandung", "t1": "🛡️ Privacy scoped to your needs", "t2": "⚙️ Tailored to Your Store Workflow", "t3": "🤝 Project scope agreed together", "ctaH": "Have a Workflow You Want Automated?", "ctaP": "Every business has unique challenges. Let's have a relaxed 30-minute chat on WhatsApp. I'll break down your operations and propose the AI solution that delivers real efficiency fastest.", "ctaBtn": "💬 Chat with Syamsul on WhatsApp", "waText": "Hi Syamsul, I'd like to discuss AI automation for my business", "chat": {"promo": ["Hi! Do you have any oat milk 1L on promo today?", "Hi there! Yes — Oatside Barista 1L is on promo at promo and stock details follow store data. Want me to pack one up? Instant delivery available now 😊"], "stok": ["I'd like 3 pcs of the sage linen shirt, size XL — available?", "Sure! Checked the system: Linen Sage size XL has 5 pcs ready. Total the total is calculated from the catalogue. Which address should we ship to?"], "ongkir": ["How much is shipping to Buah Batu, Bandung?", "To Buah Batu, Bandung: rates and estimates depend on destination and service.. Which would you like?"]}, "lines": {"uul": ["Hi! I'm Syamsul (Uul) 👋", "Got a messy workflow? Tell me about it!", "Let's build a private AI system for your business 🚀", "Hehe, that tickles! 😄"], "bot": ["Support 24/7 nonstop! 💬", "New message? I reply in a flash ⚡", "Ding! New order & lead just landed 🛒", "Let's chat on WhatsApp!"], "gear": ["Receipts & data sync themselves ⚙️", "Repetitive work done, zero burnout!", "Whoosh… I get dizzy when you scroll fast 🌀", "Repetitive tasks? Leave them to me."]}}};
-  (() => {
-    'use strict';
-    const KEY = 'preferred_lang';
-    let lang = 'id', chatType = 'promo';
-    try { const v = localStorage.getItem(KEY); if (v === 'id' || v === 'en') lang = v; } catch (e) {}
-    window.getLang = () => lang;
+      <!-- Modern Interactive 3 Mascot Trio Stage (Spring Physics & Gaze Tracking) -->
+      <section class="mascot-stage" id="stage" aria-label="Trio karakter AI interaktif">
+        <div class="stage-tag">Gerakkan kursor · sentuh · scroll · klik karakter</div>
+        <div class="trio">
+          <!-- ================= CHAT-BOT ================= -->
+      <div class="char bot" id="charMascotBot" tabindex="0" role="button" aria-label="Chat-Bot, maskot WhatsApp sales">
+        <div class="bubble" id="bubbleMascotBot">CS 24 jam, tanpa libur!</div>
+        <svg viewBox="0 0 160 190" aria-hidden="true">
+          <defs>
+            <linearGradient id="gBody" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#6ee7a0"/><stop offset=".55" stop-color="#34d27b"/><stop offset="1" stop-color="#16a34a"/>
+            </linearGradient>
+            <radialGradient id="gGloss" cx=".3" cy=".15" r=".6">
+              <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="gVisor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#10261a"/><stop offset="1" stop-color="#07140d"/>
+            </linearGradient>
+            <clipPath id="clBotEyeL"><circle cx="58" cy="97" r="14"/></clipPath>
+            <clipPath id="clBotEyeR"><circle cx="102" cy="97" r="14"/></clipPath>
+          </defs>
+          <!-- antenna -->
+          <g id="botAnt">
+            <rect x="77.5" y="22" width="5" height="34" rx="2.5" fill="#15803d"/>
+            <circle cx="80" cy="20" r="8" fill="#fbbf24"/>
+            <circle cx="77.5" cy="17.5" r="2.6" fill="#fff" opacity=".7"/>
+            <g class="wifi" fill="none" stroke="#4ade80" stroke-width="3.2" stroke-linecap="round">
+              <path d="M70 6 Q80 -1 90 6"/><path d="M63 -1 Q80 -13 97 -1"/><path d="M56 -8 Q80 -25 104 -8"/>
+            </g>
+          </g>
+          <!-- arms -->
+          <g id="botArmL"><ellipse cx="18" cy="116" rx="11" ry="14" fill="#22c55e"/></g>
+          <g id="botArmR" style="transform-origin:134px 112px"><ellipse cx="142" cy="116" rx="11" ry="14" fill="#22c55e"/></g>
+          <!-- feet -->
+          <ellipse cx="56" cy="170" rx="17" ry="9" fill="#15803d"/><ellipse cx="104" cy="170" rx="17" ry="9" fill="#15803d"/>
+          <!-- body -->
+          <g id="botBody">
+            <path d="M22 98 Q22 52 80 52 Q138 52 138 98 L138 122 Q138 168 80 168 Q22 168 22 122 Z" fill="url(#gBody)"/>
+            <path d="M22 98 Q22 52 80 52 Q138 52 138 98 L138 122 Q138 168 80 168 Q22 168 22 122 Z" fill="url(#gGloss)"/>
+            <!-- chat tail -->
+            <path d="M40 160 L26 184 L62 168 Z" fill="#16a34a"/>
+            <!-- visor -->
+            <rect x="32" y="70" width="96" height="56" rx="28" fill="url(#gVisor)"/>
+            <rect x="32" y="70" width="96" height="56" rx="28" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+            <!-- eyes -->
+            <g id="botEyeL" style="transform-origin:58px 97px">
+              <circle cx="58" cy="97" r="14" fill="#f4fff8"/>
+              <g clip-path="url(#clBotEyeL)"><g id="pBotL"><circle cx="58" cy="97" r="8" fill="#0b1b12"/><circle cx="61" cy="93.5" r="3" fill="#fff"/></g></g>
+            </g>
+            <g id="botEyeR" style="transform-origin:102px 97px">
+              <circle cx="102" cy="97" r="14" fill="#f4fff8"/>
+              <g clip-path="url(#clBotEyeR)"><g id="pBotR"><circle cx="102" cy="97" r="8" fill="#0b1b12"/><circle cx="105" cy="93.5" r="3" fill="#fff"/></g></g>
+            </g>
+            <!-- mouth + blush -->
+            <path id="botMouth" d="M72 134 Q80 144 88 134" fill="none" stroke="#14532d" stroke-width="4" stroke-linecap="round" style="transform-origin:80px 134px"/>
+            <ellipse cx="38" cy="134" rx="7" ry="4" fill="#fda4af" opacity=".6"/><ellipse cx="122" cy="134" rx="7" ry="4" fill="#fda4af" opacity=".6"/>
+          </g>
+          <!-- typing bubble -->
+          <g id="botTyping" style="transform-origin:140px 46px">
+            <rect x="116" y="28" width="38" height="24" rx="12" fill="#fff"/><path d="M124 50 L120 60 L134 51 Z" fill="#fff"/>
+            <g class="dots" fill="#16a34a"><circle cx="127" cy="40" r="3"/><circle cx="135" cy="40" r="3"/><circle cx="143" cy="40" r="3"/></g>
+          </g>
+        </svg>
+        <div class="shadow" id="shMascotBot"></div>
+        <div class="label">Chat-Bot <small>· WA Sales</small></div>
+      </div>
+          <!-- ================= UUL ================= -->
+      <div class="char uul" id="charMascotUul" tabindex="0" role="button" aria-label="Uul, AI builder">
+        <div class="bubble" id="bubbleMascotUul">Halo! Saya Uul 👋</div>
+        <svg viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="gSkin" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f0b98f"/><stop offset="1" stop-color="#d89870"/>
+            </linearGradient>
+            <linearGradient id="gHood" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#b9bfcc"/><stop offset="1" stop-color="#8f96a6"/>
+            </linearGradient>
+            <linearGradient id="gHair" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#2b2838"/><stop offset="1" stop-color="#14121b"/>
+            </linearGradient>
+            <clipPath id="clUulBody"><path d="M14 250 Q16 196 70 182 L130 182 Q184 196 186 250 Z"/></clipPath>
+            <clipPath id="clUulEyeL"><ellipse cx="80" cy="106" rx="10.5" ry="11"/></clipPath>
+            <clipPath id="clUulEyeR"><ellipse cx="120" cy="106" rx="10.5" ry="11"/></clipPath>
+          </defs>
+          <!-- body group (breathing) -->
+          <g id="uulBody" style="transform-origin:100px 250px">
+            <ellipse cx="100" cy="176" rx="66" ry="30" fill="#7d8494"/>   <!-- hood back -->
+            <path d="M14 250 Q16 196 70 182 L130 182 Q184 196 186 250 Z" fill="url(#gHood)"/>
+            <path d="M14 250 Q16 196 70 182 L130 182 Q184 196 186 250 Z" fill="url(#gGloss)" opacity=".5"/>
+            <rect x="85" y="150" width="30" height="40" rx="14" fill="#c98b64"/> <!-- neck -->
+            <path d="M62 180 Q100 214 138 180 Q136 202 100 212 Q64 202 62 180 Z" fill="#7d8494"/>  <!-- hood collar -->
+            <path d="M70 184 Q100 206 130 184" fill="none" stroke="#2c3a4a" stroke-width="5" stroke-linecap="round" opacity=".55"/> <!-- teal tee peek -->
+            <!-- drawstrings -->
+            <path d="M80 200 Q76 220 78 238" fill="none" stroke="#efe9dc" stroke-width="3" stroke-linecap="round"/>
+            <path d="M120 200 Q124 220 122 238" fill="none" stroke="#efe9dc" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="78" cy="239" r="3.2" fill="#d9d1bf"/><circle cx="122" cy="239" r="3.2" fill="#d9d1bf"/>
+            <!-- chest badge -->
+            <g clip-path="url(#clUulBody)">
+              <circle cx="100" cy="250" r="30" fill="#1b2233"/><circle cx="100" cy="250" r="30" fill="none" stroke="#f4f6fb" stroke-width="3"/>
+              <circle cx="100" cy="250" r="22" fill="none" stroke="#4ade80" stroke-width="1.6" stroke-dasharray="3 4"/>
+              <path d="M100 224 l3 8 8 1 -6 5 2 8 -7 -4 -7 4 2 -8 -6 -5 8 -1z" fill="#fbbf24"/>
+            </g>
+          </g>
+          <!-- head group (tilt/nod) -->
+          <g id="uulHead">
+            <ellipse cx="52" cy="112" rx="9" ry="13" fill="#d89870"/><ellipse cx="148" cy="112" rx="9" ry="13" fill="#d89870"/>
+            <ellipse cx="52" cy="113" rx="4" ry="7" fill="#c07f58"/><ellipse cx="148" cy="113" rx="4" ry="7" fill="#c07f58"/>
+            <!-- face -->
+            <path d="M52 104 Q52 54 100 54 Q148 54 148 104 Q148 156 100 164 Q52 156 52 104 Z" fill="url(#gSkin)"/>
+            <!-- faint beard + mustache -->
+            <path d="M60 124 Q64 160 100 164 Q136 160 140 124 Q130 146 100 148 Q70 146 60 124 Z" fill="#2a2430" opacity=".32"/>
+            <path d="M82 134 Q100 124 118 134 Q100 130 82 134 Z" fill="#2a2430" opacity=".55"/>
+            <ellipse cx="100" cy="153" rx="9" ry="4.5" fill="#2a2430" opacity=".4"/>
+            <!-- cheeks -->
+            <ellipse cx="68" cy="130" rx="8" ry="5" fill="#f08a7e" opacity=".35"/><ellipse cx="132" cy="130" rx="8" ry="5" fill="#f08a7e" opacity=".35"/>
+            <!-- eyes -->
+            <g id="uulEyeL" style="transform-origin:80px 106px">
+              <ellipse cx="80" cy="106" rx="10.5" ry="11" fill="#fff"/>
+              <g clip-path="url(#clUulEyeL)"><g id="pUulL"><circle cx="80" cy="106" r="7" fill="#3b2418"/><circle cx="80" cy="106" r="4" fill="#120a07"/><circle cx="83" cy="102.5" r="2.4" fill="#fff"/></g></g>
+            </g>
+            <g id="uulEyeR" style="transform-origin:120px 106px">
+              <ellipse cx="120" cy="106" rx="10.5" ry="11" fill="#fff"/>
+              <g clip-path="url(#clUulEyeR)"><g id="pUulR"><circle cx="120" cy="106" r="7" fill="#3b2418"/><circle cx="120" cy="106" r="4" fill="#120a07"/><circle cx="123" cy="102.5" r="2.4" fill="#fff"/></g></g>
+            </g>
+            <!-- brows -->
+            <g id="uulBrows" style="transform-origin:100px 92px">
+              <path d="M66 91 Q80 82 94 90" fill="none" stroke="#1b1822" stroke-width="5" stroke-linecap="round"/>
+              <path d="M106 90 Q120 82 134 91" fill="none" stroke="#1b1822" stroke-width="5" stroke-linecap="round"/>
+            </g>
+            <!-- nose -->
+            <path d="M100 112 Q94 128 103 130" fill="none" stroke="#b97650" stroke-width="3" stroke-linecap="round"/>
+            <!-- mouth -->
+            <g id="uulMouth" style="transform-origin:100px 138px">
+              <path d="M82 137 Q100 158 118 137 Q100 143 82 137 Z" fill="#6b2430"/>
+              <path d="M85 138.5 Q100 144.5 115 138.5 Q113 148 100 149 Q87 148 85 138.5 Z" fill="#fff"/>
+            </g>
+            <!-- hair (lagging spring) -->
+            <g id="uulHair">
+              <path d="M46 108 Q36 64 62 48 L56 22 L80 40 L88 10 L104 38 L122 12 L126 42 L148 26 L142 54 Q164 70 154 108 Q150 82 136 74 Q100 62 64 74 Q50 82 46 108 Z" fill="url(#gHair)"/>
+              <path d="M70 52 L74 36 L84 48" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M108 44 L118 26 L120 44" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="2.5" stroke-linecap="round"/>
+            </g>
+          </g>
+        </svg>
+        <div class="shadow" id="shMascotUul"></div>
+        <div class="label">Uul <small>· AI Builder</small></div>
+      </div>
+          <!-- ================= GEAR ================= -->
+      <div class="char gear" id="charMascotGear" tabindex="0" role="button" aria-label="Workflow-Gear, maskot otomasi">
+        <div class="bubble" id="bubbleMascotGear">Otomasi tanpa capek!</div>
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <defs>
+            <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fde68a"/><stop offset=".5" stop-color="#fbbf24"/><stop offset="1" stop-color="#d97706"/>
+            </linearGradient>
+            <linearGradient id="gFace" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#fffbeb"/><stop offset="1" stop-color="#fde9a8"/>
+            </linearGradient>
+            <clipPath id="clGearEyeL"><circle cx="66" cy="76" r="9"/></clipPath>
+            <clipPath id="clGearEyeR"><circle cx="94" cy="76" r="9"/></clipPath>
+          </defs>
+          <g id="gearBody">
+            <path id="gearShade" fill="#b45309" transform="translate(0 4)"/>
+            <path id="gearMain" fill="url(#gGold)"/>
+            <circle cx="80" cy="80" r="50" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2"/>
+            <circle cx="80" cy="80" r="50" fill="none" stroke="#b45309" stroke-width="1.5" stroke-dasharray="2 9" opacity=".5"/>
+            <g fill="#92400e" opacity=".55" id="gearRivets"></g>
+          </g>
+          <circle cx="80" cy="80" r="38" fill="url(#gFace)"/>
+          <circle cx="80" cy="80" r="38" fill="none" stroke="#d97706" stroke-width="3"/>
+          <g id="gearFace">
+            <g style="transform-origin:66px 76px" id="gearEyeL">
+              <circle cx="66" cy="76" r="9" fill="#fff" stroke="#e8c76b" stroke-width="1"/>
+              <g clip-path="url(#clGearEyeL)"><g id="pGearL"><circle cx="66" cy="76" r="5.6" fill="#3a2108"/><circle cx="68" cy="73.5" r="2" fill="#fff"/></g></g>
+            </g>
+            <g style="transform-origin:94px 76px" id="gearEyeR">
+              <circle cx="94" cy="76" r="9" fill="#fff" stroke="#e8c76b" stroke-width="1"/>
+              <g clip-path="url(#clGearEyeR)"><g id="pGearR"><circle cx="94" cy="76" r="5.6" fill="#3a2108"/><circle cx="96" cy="73.5" r="2" fill="#fff"/></g></g>
+            </g>
+            <ellipse cx="54" cy="91" rx="5.5" ry="3.4" fill="#fb923c" opacity=".45"/><ellipse cx="106" cy="91" rx="5.5" ry="3.4" fill="#fb923c" opacity=".45"/>
+            <path id="gearMouth" d="M71 93 Q80 102 89 93" fill="none" stroke="#78350f" stroke-width="3.5" stroke-linecap="round" style="transform-origin:80px 93px"/>
+          </g>
+        </svg>
+        <div class="shadow" id="shMascotGear"></div>
+        <div class="label">Workflow-Gear <small>· Otomasi</small></div>
+      </div>
+        </div>
+      </section>
 
-    const html = document.documentElement;
-    function renderChat() {
-      const c = window.I18N[lang].chat[chatType];
-      document.getElementById('cUser').textContent = '"' + c[0] + '"';
-      document.getElementById('cBot').textContent = '"' + c[1] + '"';
-    }
-    window.setChat = type => { chatType = type; renderChat(); };
+    <!-- 3 Core Solutions -->
+    <div id="layanan">
 
-    function apply() {
-      const t = window.I18N[lang];
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const v = t[el.dataset.i18n];
-        if (v == null) return;
-        el.innerHTML = v;
-      });
-      html.lang = lang;
-      document.title = t.title;
-      renderChat();
-      const cta = document.getElementById('ctaBtn');
-      if (cta) cta.href = 'https://wa.me/6281212888355?text=' + encodeURIComponent(t.waText);
-      document.querySelectorAll('.lang-btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
-    }
-    function setLang(next) {
-      if (next === lang) return;
-      lang = next;
-      try { localStorage.setItem(KEY, lang); } catch (e) {}
-      html.classList.add('i18n-swap');
-      setTimeout(() => { apply(); html.classList.remove('i18n-swap'); }, 140);
-    }
-    document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
-    apply();
-  })();
-  </script>
+      <!-- Solution 1 -->
+      <div class="solution-card">
+        <div class="card-head-row">
+          <span class="service-tag">Layanan 01 · Sales &amp; Customer Support</span>
+        </div>
+        <h3 class="card-title">Chat Pelanggan Dibalas Instan 24 Jam — Closing Otomatis Walau Anda Sedang Tidur</h3>
+        
+        <div class="block-pain">
+          <h5>⚠️ Yang Sering Terjadi di Lapangan:</h5>
+          Chat pelanggan menumpuk malam hari atau saat hari libur. Respon telat 10 menit saja, calon pembeli sudah checkout di toko sebelah. Rekrut admin shift malam? Biaya gaji membengkak dan sering salah kasih info harga atau ketersediaan stok.
+        </div>
 
-  <!-- 3D mascot stage: Three.js r128 (open source, MIT) from cdnjs; all geometry is procedural -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
+        <div class="block-sol">
+          <h5>✨ Cara Kerja Solusi AI Kami:</h5>
+          Kami memasang asisten AI privat yang diajari katalog lengkap, harga promo, dan SOP toko Anda. Menjawab ramah dalam Bahasa Indonesia natural, mengecek ketersediaan stok secara realtime, dan memandu pembeli sampai transfer selesai.
+        </div>
+
+        <!-- Interactive Demo -->
+        <div class="demo-box">
+          <div class="demo-bar">
+            <span>🎮 Coba Interaktif: Simulasi Chat Pelanggan</span>
+            <span>Contoh percakapan</span>
+          </div>
+          <div class="wa-chat" aria-live="polite" aria-atomic="true">
+            <div class="chat-bubble chat-user" id="cUser">"Halo kak, susu oatmilk 1L ada yang promo hari ini?"</div>
+            <div class="chat-bubble chat-bot" id="cBot">"Halo Kak! Ada dong, Oatside Barista 1L lagi promo Rp 38.500 dari Rp 45.000. Stok sisa 12 pcs di gudang. Mau dibungkus kak? Bisa kirim instan sekarang 😊"</div>
+          </div>
+          <div class="chip-row">
+            <button class="chip-btn" onclick="setChat('promo')">Coba: Tanya Promo</button>
+            <button class="chip-btn" onclick="setChat('stok')">Coba: Cek Ketersediaan Stok</button>
+            <button class="chip-btn" onclick="setChat('ongkir')">Coba: Cek Ongkir ke Bandung</button>
+          </div>
+        </div>
+
+        <div class="block-results">
+          <h5>Hasil Nyata untuk Bisnis Anda:</h5>
+          <ul class="results-list">
+            <li><strong>Respon &lt; 3 detik 24/7</strong> tanpa perlu mengeluarkan biaya lembur admin malam.</li>
+            <li><strong>0 calon pembeli kabur</strong> karena respon lambat saat jam istirahat.</li>
+            <li><strong>Kenaikan omset malam hari &amp; weekend</strong> hingga 20%–35% secara konsisten.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Solution 2 -->
+      <div class="solution-card">
+        <div class="card-head-row">
+          <span class="service-tag" style="background: #ffedd5; color: #9a3412;">Layanan 02 · Alur Kerja &amp; Pembukuan</span>
+        </div>
+        <h3 class="card-title">Hentikan Ketik Ulang Resi &amp; Struk — Rekap Pesanan Selesai dalam 1 Detik</h3>
+
+        <div class="block-pain">
+          <h5>⚠️ Yang Sering Terjadi di Lapangan:</h5>
+          Admin menghabiskan 4–5 jam setiap hari hanya untuk membaca bukti transfer, mencocokkan mutasi bank, dan menyalin data pesanan ke Excel. Sangat melelahkan, rawan salah catat barang, dan rentan tertipu struk transfer palsu/editan.
+        </div>
+
+        <div class="block-sol">
+          <h5>✨ Cara Kerja Solusi AI Kami:</h5>
+          Sistem AI membaca foto bukti transfer, memvalidasi keaslian mutasi rekening, mencatat data pesanan otomatis ke Google Sheets atau ERP Anda, dan mengirimkan pesan konfirmasi nomor resi ke WhatsApp pembeli secara instan.
+        </div>
+
+        <div class="block-results">
+          <h5>Hasil Nyata untuk Bisnis Anda:</h5>
+          <ul class="results-list">
+            <li><strong>Jam kerja admin manual dipangkas 85%</strong> — tim Anda bisa fokus jualan dan ekspansi.</li>
+            <li><strong>Bebas risiko penipuan struk palsu</strong> berkat verifikasi optik otomatis.</li>
+            <li><strong>Pembukuan dan laporan stok selalu sinkron</strong> setiap detik tanpa selisih.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Solution 3 -->
+      <div class="solution-card">
+        <div class="card-head-row">
+          <span class="service-tag" style="background: #e0f2fe; color: #0369a1;">Layanan 03 · Katalog &amp; E-Commerce</span>
+        </div>
+        <h3 class="card-title">Konsumen Salah Ketik? Produk Tetap Ketemu Seketika</h3>
+
+        <div class="block-pain">
+          <h5>⚠️ Yang Sering Terjadi di Lapangan:</h5>
+          Konsumen mengetik kata typo (misal: "kaos ovrsiz" atau "sepatu sneaker pth") lalu layar toko Anda menampilkan <em>"Produk Tidak Ditemukan"</em>. Pembeli langsung mengira stok kosong dan menutup website Anda untuk pindah ke toko lain.
+        </div>
+
+        <div class="block-sol">
+          <h5>✨ Cara Kerja Solusi AI Kami:</h5>
+          Algoritma pencarian cerdas yang memahami konteks, typo, dan sinonim kata bahasa Indonesia sehari-hari. Produk yang paling relevan selalu ditampilkan di urutan teratas seketika.
+        </div>
+
+        <div class="block-results">
+          <h5>Hasil Nyata untuk Bisnis Anda:</h5>
+          <ul class="results-list">
+            <li><strong>Kenaikan omset transaksi belanja hingga +16%</strong> (terbukti dari sistem skala jutaan pengguna di ByteDance).</li>
+            <li><strong>Mencegah pembeli kabur</strong> karena pencarian toko online Anda tidak pernah zonk.</li>
+            <li><strong>Pengalaman belanja cepat</strong> yang membuat pelanggan nyaman belanja berulang kali (repeat order).</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Final Call to Action -->
+    <div class="final-cta">
+      <div class="trust-badges">
+        <span class="trust-pill">🛡️ Data 100% Privat &amp; Aman</span>
+        <span class="trust-pill">⚙️ Kustom Sesuai Alur Toko Anda</span>
+        <span class="trust-pill">🤝 Garansi Dampingi Sampai Jalan</span>
+      </div>
+      <h2>Punya Alur Kerja yang Ingin Diotomatisasi?</h2>
+      <p>
+        Setiap bisnis punya tantangan unik. Mari ngobrol santai 30 menit lewat WhatsApp. Saya akan bedah alur operasional Anda dan memberikan solusi AI yang paling cepat menghasilkan efisiensi nyata.
+      </p>
+      <a class="btn btn-primary" style="font-size: 15px; padding: 14px 28px;" href="https://wa.me/6281212888355?text=Halo%20Syamsul,%20saya%20mau%20konsultasi%20kebutuhan%20otomasi%20AI%20di%20bisnis%20saya" target="_blank" rel="noopener">
+        💬 Chat WhatsApp Syamsul Sekarang
+      </a>
+    </div>
+
+  </div>
+
+  
+  <!-- Spring Physics & Interaction Engine for Modern Mascots -->
   <script>
   (() => {
     'use strict';
     const $ = id => document.getElementById(id);
-    const stage = $('stage'), cv = $('stage3d');
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+    const NS = 'http://www.w3.org/2000/svg';
 
-    /* ---------- Speech bubbles (HTML overlay) ---------- */
-    const lines = new Proxy({}, { get: (_, k) => (window.I18N && window.getLang && window.I18N[window.getLang()] ? (window.I18N[window.getLang()].lines[k] || window.I18N[window.getLang()].lines["charMascot" + k.charAt(0).toUpperCase() + k.slice(1)] || []) : []) });
-    const bubbles = { uul: $('bubbleUul'), bot: $('bubbleBot'), gear: $('bubbleGear') };
-    const bubbleTimer = {}, lineIdx = { uul: 0, bot: 0, gear: 0 };
-    function say(key, text) {
-      const b = bubbles[key];
+    /* ---------- Gear geometry (procedural 10-tooth gear) ---------- */
+    (function buildGear() {
+      const n = 10, cx = 80, cy = 80, ro = 72, ri = 58, step = Math.PI * 2 / n;
+      const pt = (r, a) => (cx + Math.cos(a) * r).toFixed(1) + ' ' + (cy + Math.sin(a) * r).toFixed(1);
+      let d = '';
+      for (let i = 0; i < n; i++) {
+        const a = i * step;
+        d += (i ? 'L' : 'M') + pt(ri, a - step * .5 + step * .06) +
+          'L' + pt(ri, a - step * .30) + 'L' + pt(ro, a - step * .17) +
+          'L' + pt(ro, a + step * .17) + 'L' + pt(ri, a + step * .30);
+      }
+      d += 'Z';
+      const gm = $('gearMain'); const gs = $('gearShade');
+      if (gm) gm.setAttribute('d', d);
+      if (gs) gs.setAttribute('d', d);
+      const g = $('gearRivets');
+      if (g) {
+        g.innerHTML = '';
+        for (let i = 0; i < 6; i++) {
+          const c = document.createElementNS(NS, 'circle');
+          const a = i * Math.PI / 3 + .5;
+          c.setAttribute('cx', (80 + Math.cos(a) * 45).toFixed(1));
+          c.setAttribute('cy', (80 + Math.sin(a) * 45).toFixed(1));
+          c.setAttribute('r', 2.6);
+          g.appendChild(c);
+        }
+      }
+    })();
+
+    /* ---------- Input: mouse, pen, touch ---------- */
+    let mx = innerWidth / 2, my = innerHeight * .3, lastInput = -1e9;
+    const setPt = (x, y) => { mx = x; my = y; lastInput = performance.now(); };
+    addEventListener('pointermove', e => setPt(e.clientX, e.clientY), { passive: true });
+    addEventListener('pointerdown', e => setPt(e.clientX, e.clientY), { passive: true });
+    addEventListener('touchstart', e => { const t = e.touches[0]; if (t) setPt(t.clientX, t.clientY); }, { passive: true });
+    addEventListener('touchmove', e => { const t = e.touches[0]; if (t) setPt(t.clientX, t.clientY); }, { passive: true });
+
+    /* ---------- Springs ---------- */
+    const spring = (k, c) => ({ x: 0, v: 0, k, c });
+    const stepSpring = (s, dt) => { s.v += (-s.k * s.x - s.c * s.v) * dt; s.x += s.v * dt; };
+
+    /* ---------- Characters ---------- */
+    const mkChar = (box, o) => Object.assign({
+      box: $(box), shadow: null, sp: null, look: { x: 0, y: 0 },
+      blink: 1, nextBlink: 1000 + Math.random() * 2500, blinkAt: -1, mood: 0
+    }, o);
+
+    const uul = mkChar('charMascotUul', {
+      sp: spring(150, 11), tilt: spring(90, 9), hair: spring(140, 7),
+      eyes: [$('pUulL'), $('pUulR')], lids: [$('uulEyeL'), $('uulEyeR')], r: 4.2, ax: .5, ay: .43
+    });
+    const bot = mkChar('charMascotBot', {
+      sp: spring(110, 7), tilt: spring(80, 6), ant: spring(130, 4.5),
+      eyes: [$('pBotL'), $('pBotR')], lids: [$('botEyeL'), $('botEyeR')], r: 5.5, ax: .5, ay: .5
+    });
+    const gear = mkChar('charMascotGear', {
+      sp: spring(80, 6), tilt: spring(70, 8),
+      eyes: [$('pGearL'), $('pGearR')], lids: [$('gearEyeL'), $('gearEyeR')], r: 3.6, ax: .5, ay: .48,
+      angle: 0, omega: 24, dizzy: 0
+    });
+    const chars = [uul, bot, gear];
+    uul.shadow = $('shMascotUul');
+    bot.shadow = $('shMascotBot');
+    gear.shadow = $('shMascotGear');
+
+    /* ---------- Scroll reactivity ---------- */
+    let lastY = scrollY, scrollVel = 0, pendingDy = 0;
+    const onScroll = () => {
+      const y = scrollY, dy = y - lastY; lastY = y; pendingDy += dy;
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+
+    /* ---------- Poke / Speech bubbles ---------- */
+    const lines = {
+      charMascotUul: [
+        'Halo! Saya Syamsul (Uul) 👋',
+        'Punya alur kerja yang ribet? Ceritakan!',
+        'Kita bangun sistem AI privat untuk bisnismu 🚀',
+        'Hehe, geli disentuh! 😄'
+      ],
+      charMascotBot: [
+        'CS 24 jam nonstop! 💬',
+        'Pesan masuk? Langsung saya balas kilat ⚡',
+        'Ting! Pesanan & lead baru masuk 🛒',
+        'Ayo ngobrol di WhatsApp!'
+      ],
+      charMascotGear: [
+        'Rekap resi & data jalan sendiri ⚙️',
+        'Kerja berulang beres tanpa capek!',
+        'Wuuush… pusing kalau scroll kencang 🌀',
+        'Tugas berulang? Serahkan ke saya.'
+      ]
+    };
+    const bubbleOf = {
+      charMascotUul: $('bubbleMascotUul'),
+      charMascotBot: $('bubbleMascotBot'),
+      charMascotGear: $('bubbleMascotGear')
+    };
+    const timers = {};
+    const idx = { charMascotUul: 0, charMascotBot: 0, charMascotGear: 0 };
+    function say(c, text) {
+      const b = bubbleOf[c.box.id];
       if (!b) return;
       if (text) b.textContent = text;
       b.classList.add('on');
-      clearTimeout(bubbleTimer[key]);
-      bubbleTimer[key] = setTimeout(() => b.classList.remove('on'), 2400);
+      clearTimeout(timers[c.box.id]);
+      timers[c.box.id] = setTimeout(() => b.classList.remove('on'), 2400);
     }
-    const nextLine = key => { lineIdx[key] = (lineIdx[key] + 1) % lines[key].length; return lines[key][lineIdx[key]]; };
-    const buttons = { uul: $('btnUul'), bot: $('btnBot'), gear: $('btnGear') };
-    let onPoke = key => say(key, nextLine(key));
-    Object.keys(buttons).forEach(k => buttons[k].addEventListener('click', () => onPoke(k)));
-    setTimeout(() => say('uul'), 800);
-    setTimeout(() => say('bot'), 1500);
-    setTimeout(() => say('gear'), 2200);
-
-    /* ---------- WebGL bootstrap ---------- */
-    let renderer;
-    try {
-      if (!window.THREE) throw new Error('three');
-      renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true, powerPreference: 'low-power' });
-    } catch (e) { stage.classList.add('no-webgl'); return; }
-    renderer.outputEncoding = THREE.sRGBEncoding;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.05;
-
-    const scene = new THREE.Scene();
-    const cam = new THREE.PerspectiveCamera(30, 1, 0.1, 60);
-    const CAM_D = 10.4;
-    cam.position.set(0, 2.7, CAM_D);
-    cam.lookAt(0, 1.7, 0);
-
-    const C = hex => new THREE.Color(hex).convertSRGBToLinear();
-    const std = (hex, rough, metal, extra) => new THREE.MeshStandardMaterial(Object.assign({ color: C(hex), roughness: rough, metalness: metal || 0 }, extra));
-    const gloss = (hex, extra) => new THREE.MeshPhysicalMaterial(Object.assign({ color: C(hex), roughness: .16, metalness: 0, clearcoat: 1, clearcoatRoughness: .06 }, extra));
-    const basic = (hex, extra) => new THREE.MeshBasicMaterial(Object.assign({ color: C(hex) }, extra));
-
-    /* ---------- Studio lighting + procedural softbox environment ---------- */
-    scene.add(new THREE.AmbientLight(0xffffff, .38));
-    const key = new THREE.DirectionalLight(0xfff1de, 1.55); key.position.set(-3.5, 6, 6); scene.add(key);
-    const rim = new THREE.DirectionalLight(0x9cc7ff, 1.5); rim.position.set(4.5, 4, -5); scene.add(rim);
-    const fill = new THREE.DirectionalLight(0xffe2c0, .45); fill.position.set(5, 1, 5); scene.add(fill);
-    {
-      const pm = new THREE.PMREMGenerator(renderer);
-      const env = new THREE.Scene();
-      const sg = new THREE.SphereGeometry(40, 16, 12);
-      const cols = [], p = sg.attributes.position, lo = new THREE.Color(0x9aa7b8), hi = new THREE.Color(0xf4f8ff);
-      for (let i = 0; i < p.count; i++) { const c = lo.clone().lerp(hi, (p.getY(i) / 40 + 1) / 2); cols.push(c.r, c.g, c.b); }
-      sg.setAttribute('color', new THREE.Float32BufferAttribute(cols, 3));
-      env.add(new THREE.Mesh(sg, new THREE.MeshBasicMaterial({ side: THREE.BackSide, vertexColors: true })));
-      const box = (x, y, z, w, h, col, k) => {
-        const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(col).multiplyScalar(k), side: THREE.DoubleSide }));
-        m.position.set(x, y, z); m.lookAt(0, 0, 0); env.add(m);
-      };
-      box(-12, 12, 14, 12, 9, 0xffffff, 7);
-      box(14, 7, -12, 3, 14, 0xaed0ff, 5);
-      box(13, 1, 12, 8, 4, 0xffe6c8, 2.5);
-      scene.environment = pm.fromScene(env, .04).texture;
-      pm.dispose();
+    function poke(c) {
+      const l = lines[c.box.id];
+      idx[c.box.id] = (idx[c.box.id] + 1) % l.length;
+      say(c, l[idx[c.box.id]]);
+      if (reduce) return;
+      c.sp.v = -520; c.mood = 1;
+      if (c.ant) c.ant.v = 900;
+      if (c === gear) gear.omega += 700;
+      if (navigator.vibrate) { try { navigator.vibrate(8); } catch (e) {} }
     }
-
-    /* ---------- Geometry helpers ---------- */
-    const SPH = new THREE.SphereGeometry(1, 24, 18);
-    const ell = (rx, ry, rz, mat, x, y, z) => { const m = new THREE.Mesh(SPH, mat); m.scale.set(rx, ry, rz); m.position.set(x || 0, y || 0, z || 0); return m; };
-    function capsule(r, len, mat, seg) {
-      const pts = [], h = len / 2;
-      for (let i = 0; i <= 10; i++) { const a = -Math.PI / 2 + i / 10 * Math.PI / 2; pts.push(new THREE.Vector2(Math.cos(a) * r, -h + Math.sin(a) * r)); }
-      for (let i = 0; i <= 10; i++) { const a = i / 10 * Math.PI / 2; pts.push(new THREE.Vector2(Math.cos(a) * r, h + Math.sin(a) * r)); }
-      return new THREE.Mesh(new THREE.LatheGeometry(pts, seg || 22), mat);
-    }
-    const arc = (r, tube, a, mat) => new THREE.Mesh(new THREE.TorusGeometry(r, tube, 8, 28, a), mat);
-    const at = (o, x, y, z) => { o.position.set(x, y, z); return o; };
-    function gearGeo(n, ro, ri, depth) {
-      const st = Math.PI * 2 / n, sh = new THREE.Shape();
-      const pt = (r, a) => [Math.cos(a) * r, Math.sin(a) * r];
-      for (let k = 0; k < n; k++) {
-        const a = k * st, q = [pt(ri, a - st * .30), pt(ro, a - st * .16), pt(ro, a + st * .16), pt(ri, a + st * .30), pt(ri, a + st * .5)];
-        q.forEach((v, i) => (k === 0 && i === 0) ? sh.moveTo(v[0], v[1]) : sh.lineTo(v[0], v[1]));
-      }
-      const g = new THREE.ExtrudeGeometry(sh, { depth, bevelEnabled: true, bevelThickness: .09, bevelSize: .07, bevelSegments: 3, curveSegments: 4 });
-      g.translate(0, 0, -depth / 2);
-      return g;
-    }
-
-    /* ---------- Characters ---------- */
-    const hits = [];
-    const hitProxy = (r, x, y) => { const m = new THREE.Mesh(new THREE.SphereGeometry(r, 8, 6), new THREE.MeshBasicMaterial({ visible: false })); m.position.set(x, y, 0); return m; };
-    const blink = []; // eye groups that squash on blink
-
-    /* ---- Uul ---- */
-    const uul = { key: 'uul', g: new THREE.Group() };
-    {
-      const skin = std(0xeeb48f, .6, 0), skinD = std(0xe4a37c, .65, 0);
-      const hood = std(0x1f2a44, .85, 0), hoodL = std(0x2b3a5c, .85, 0);
-      const hair = std(0x2b1a12, .48, .05), hairH = std(0x41281b, .45, .05), hairD = std(0x1d110b, .55, .05);
-      const g = uul.g;
-      g.add(ell(.82, .62, .6, hood, 0, .5, 0));
-      uul.torso = ell(.98, .82, .64, hood, 0, .88, 0); g.add(uul.torso);
-      const collar = new THREE.Mesh(new THREE.TorusGeometry(.4, .14, 12, 28), hood); collar.rotation.x = Math.PI / 2; collar.scale.set(1, 1, .9); collar.position.set(0, 1.58, .02); g.add(collar);
-      g.add(ell(.5, .34, .3, hood, 0, 1.52, -.34));
-      g.add(ell(.52, .2, .12, hoodL, 0, .58, .58));
-      [-1, 1].forEach(s => {
-        const cord = capsule(.022, .24, std(0xf1f5f9, .6, 0)); cord.position.set(s * .15, 1.3, .55); g.add(cord);
-        g.add(ell(.04, .04, .04, std(0x22c55e, .4, 0), s * .15, 1.12, .55));
-      });
-      // arms pivot at shoulders
-      uul.arms = [-1, 1].map(s => {
-        const p = new THREE.Group(); p.position.set(s * 1.0, 1.38, 0);
-        p.add(at(capsule(.2, .5, hood), 0, -.42, 0));
-        p.add(ell(.17, .17, .17, skin, 0, -.92, 0));
-        g.add(p); return p;
-      });
-      // head
-      const head = uul.head = new THREE.Group(); head.position.set(0, 1.66, 0); g.add(head);
-      head.add(at(new THREE.Mesh(new THREE.CylinderGeometry(.2, .25, .32, 16), skinD), 0, .06, 0));
-      head.add(ell(.62, .68, .6, skin, 0, .78, 0));
-      head.add(ell(.5, .44, .5, skin, 0, .56, .08));
-      [-1, 1].forEach(s => {
-        head.add(ell(.09, .15, .07, skinD, s * .63, .7, -.02));
-        head.add(ell(.07, .16, .05, hairD, s * .56, .83, .2)); // sideburn
-        const cheek = ell(.1, .06, .03, basic(0xff8fa3, { transparent: true, opacity: .32 }), s * .38, .58, .47); cheek.rotation.y = s * .6; head.add(cheek);
-      });
-      // eyes
-      uul.pupils = [];
-      uul.eyes = [-1, 1].map(s => {
-        const e = new THREE.Group(); e.position.set(s * .24, .82, .5);
-        e.add(ell(.115, .13, .07, std(0xffffff, .3, 0)));
-        const pu = new THREE.Group(); pu.position.z = .04;
-        pu.add(ell(.078, .09, .04, std(0x4a2c1a, .3, 0)));
-        pu.add(ell(.045, .055, .045, std(0x0b0705, .2, 0), 0, 0, .005));
-        pu.add(ell(.022, .022, .02, basic(0xffffff), .028, .035, .04));
-        e.add(pu); head.add(e); uul.pupils.push(pu); blink.push(e); return e;
-      });
-      uul.brows = new THREE.Group(); head.add(uul.brows);
-      [-1, 1].forEach(s => {
-        const b = capsule(.024, .13, hair); b.rotation.z = Math.PI / 2 + s * -.1; b.position.set(s * .24, 1.0, .5); uul.brows.add(b);
-      });
-      head.add(ell(.07, .06, .07, skinD, 0, .67, .59));
-      uul.smile = arc(.17, .024, Math.PI * .8, basic(0x8a3a3a)); uul.smile.rotation.z = -Math.PI * .9; uul.smile.position.set(0, .6, .56); head.add(uul.smile);
-      // hair: soft textured crop with side-swept fringe and tapered sides (rounded locks, no spikes)
-      const hr = uul.hair = new THREE.Group(); head.add(hr);
-      const cap = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 20, 0, Math.PI * 2, 0, 1.8), hair);
-      cap.scale.set(.665, .72, .66); cap.position.set(0, .78, -.03); cap.rotation.x = -.9; hr.add(cap);
-      const lock = (mat, rx, ry, rz, x, y, z, ax, ay, az) => { const m = ell(rx, ry, rz, mat, x, y, z); m.rotation.set(ax, ay, az); hr.add(m); };
-      lock(hair, .54, .24, .56, 0, 1.36, .0, -.2, 0, -.06);
-      lock(hairH, .46, .13, .4, .04, 1.45, .08, -.42, 0, -.1);
-      [[-.28, 1.2, .5, -.22], [-.02, 1.23, .52, -.3], [.24, 1.19, .5, -.38]].forEach((l, i) => {
-        lock(i === 1 ? hairH : hair, .27, .065, .2, l[0], l[1], l[2], .55, -.12 + i * .1, l[3]);
-      });
-      lock(hairD, .5, .2, .3, 0, 1.28, -.42, -.6, 0, 0);
-      g.add(uul.hit = hitProxy(1.7, 0, 1.5));
-      hits.push(uul);
-    }
-
-    /* ---- Chat-Bot ---- */
-    const bot = { key: 'bot', g: new THREE.Group() };
-    {
-      const white = gloss(0xf8fafc), visor = gloss(0x0b1220, { roughness: .08 }), green = std(0x22c55e, .35, 0, { emissive: C(0x22c55e), emissiveIntensity: .35 });
-      const g = bot.g; const fl = bot.float = new THREE.Group(); fl.position.y = 1.35; g.add(fl);
-      fl.add(capsule(.78, .9, white, 28));
-      const band = new THREE.Mesh(new THREE.TorusGeometry(.785, .035, 8, 40), green); band.rotation.x = Math.PI / 2; band.position.y = -.28; fl.add(band);
-      fl.add(ell(.62, .42, .46, visor, 0, .6, .38));
-      bot.eyes = [-1, 1].map(s => {
-        const e = new THREE.Group(); e.position.set(s * .22, .66, .8);
-        e.add(capsule(.062, .1, basic(0x4ade80)));
-        const halo = capsule(.12, .12, basic(0x22c55e, { transparent: true, opacity: .22, blending: THREE.AdditiveBlending, depthWrite: false })); halo.position.z = -.01; e.add(halo);
-        fl.add(e); blink.push(e); return e;
-      });
-      bot.mouth = arc(.1, .02, Math.PI * .8, basic(0x4ade80)); bot.mouth.rotation.z = -Math.PI * .9; bot.mouth.position.set(0, .56, .82); fl.add(bot.mouth);
-      [-1, 1].forEach(s => fl.add(ell(.1, .2, .2, green, s * .78, .56, 0)));
-      fl.add(ell(.32, .15, .08, visor, 0, -.12, .74));
-      bot.dots = [-1, 0, 1].map(i => { const d = ell(.04, .04, .04, basic(0x4ade80), i * .12, -.12, .8); fl.add(d); return d; });
-      bot.arms = [-1, 1].map(s => {
-        const p = new THREE.Group(); p.position.set(s * .8, .05, 0);
-        p.add(at(capsule(.1, .32, white), 0, -.3, 0)); p.add(ell(.11, .11, .11, green, 0, -.55, 0));
-        fl.add(p); return p;
-      });
-      bot.ant = new THREE.Group(); bot.ant.position.set(0, 1.22, 0);
-      bot.ant.add(at(new THREE.Mesh(new THREE.CylinderGeometry(.022, .022, .3, 8), std(0x94a3b8, .4, .6)), 0, .15, 0));
-      bot.ant.add(ell(.07, .07, .07, green, 0, .32, 0)); fl.add(bot.ant);
-      bot.wifi = new THREE.Group(); bot.wifi.position.set(0, 2.0, 0); fl.add(bot.wifi);
-      bot.waves = [.2, .35, .5].map(r => {
-        const m = arc(r, .035, Math.PI / 2, basic(0x22c55e, { transparent: true, opacity: .3 })); m.rotation.z = Math.PI / 4; bot.wifi.add(m); return m;
-      });
-      bot.wifi.add(at(ell(.055, .055, .055, basic(0x22c55e)), 0, -.02, 0));
-      g.add(bot.hit = hitProxy(1.6, 0, 1.6));
-      hits.push(bot);
-    }
-
-    /* ---- Workflow-Gear (real beveled 3D gold gear + meshing mini gear) ---- */
-    const gear = { key: 'gear', g: new THREE.Group() };
-    {
-      const N1 = 10, N2 = 6, PHI = -.65, DIST = 1.52;
-      const gold = std(0xf2ae12, .26, .9, { emissive: C(0xff9a00), emissiveIntensity: 0 });
-      const plate = std(0xfcd34d, .32, .65, { emissive: C(0xff9a00), emissiveIntensity: 0 });
-      const steel = std(0xb8c4d6, .3, .9);
-      const root = gear.root = new THREE.Group(); root.position.set(-.7, 1.78, 0); gear.g.add(root);
-      gear.tilt = new THREE.Group(); root.add(gear.tilt);
-      gear.big = new THREE.Mesh(gearGeo(N1, .95, .78, .34), gold); gear.tilt.add(gear.big);
-      for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3 + .5; gear.big.add(ell(.05, .05, .05, std(0xb45309, .4, .7), Math.cos(a) * .74, Math.sin(a) * .74, .26)); }
-      gear.mini = new THREE.Mesh(gearGeo(N2, .575, .405, .34), steel);
-      gear.mini.position.set(Math.cos(PHI) * DIST, Math.sin(PHI) * DIST, 0); gear.tilt.add(gear.mini);
-      const hub = new THREE.Mesh(new THREE.CylinderGeometry(.14, .14, .5, 16), std(0x64748b, .35, .8)); hub.rotation.x = Math.PI / 2; gear.mini.add(hub);
-      const face = gear.face = new THREE.Group(); face.position.z = .2; gear.tilt.add(face);
-      const pl = new THREE.Mesh(new THREE.CylinderGeometry(.6, .6, .12, 40), plate); pl.rotation.x = Math.PI / 2; pl.position.z = .06; face.add(pl);
-      const rg = new THREE.Mesh(new THREE.TorusGeometry(.6, .045, 10, 40), std(0xc2710c, .35, .8)); rg.position.z = .12; face.add(rg);
-      gear.pupils = [];
-      gear.eyes = [-1, 1].map(s => {
-        const e = new THREE.Group(); e.position.set(s * .24, .1, .2);
-        e.add(ell(.13, .15, .08, std(0xffffff, .3, 0)));
-        const pu = new THREE.Group(); pu.position.z = .05;
-        pu.add(ell(.075, .09, .04, std(0x3a2108, .3, 0))); pu.add(ell(.025, .025, .02, basic(0xffffff), .03, .04, .04));
-        e.add(pu); face.add(e); gear.pupils.push(pu); blink.push(e); return e;
-      });
-      gear.mouth = arc(.15, .028, Math.PI * .8, basic(0x78350f)); gear.mouth.rotation.z = -Math.PI * .9; gear.mouth.position.set(0, -.02, .2); face.add(gear.mouth);
-      gear.light = new THREE.PointLight(0xffc34d, 0, 7); gear.light.position.set(0, 0, 1.6); gear.tilt.add(gear.light);
-      gear.ring = new THREE.Mesh(new THREE.TorusGeometry(1, .035, 8, 56), basic(0xf59e0b, { transparent: true, opacity: 0, depthWrite: false }));
-      gear.ring.position.z = .4; gear.tilt.add(gear.ring);
-      const SPK = 28, sp = new Float32Array(SPK * 3);
-      gear.sparkV = new Float32Array(SPK * 3);
-      const sgeo = new THREE.BufferGeometry(); sgeo.setAttribute('position', new THREE.BufferAttribute(sp, 3));
-      gear.sparks = new THREE.Points(sgeo, new THREE.PointsMaterial({ color: 0xf59e0b, size: .14, transparent: true, opacity: 0, depthWrite: false }));
-      gear.sparks.frustumCulled = false; gear.tilt.add(gear.sparks);
-      gear.N1 = N1; gear.N2 = N2; gear.PHI = PHI;
-      gear.ang = 0; gear.omega = .7; gear.glow = 0; gear.ringT = 1; gear.sparkT = 1; gear.dizzy = 0; gear.clicks = []; gear.tickAcc = 0; gear.tick = 0;
-      gear.g.add(gear.hit = hitProxy(2, -.1, 1.7));
-      hits.push(gear);
-    }
-
-    [uul, bot, gear].forEach(c => {
-      scene.add(c.g);
-      Object.assign(c, { x: 0, s: 1, hop: 0, hv: 0, sq: 0, sqv: 0, mood: 0, yaw: 0, pitch: 0 });
+    chars.forEach(c => {
+      if (!c.box) return;
+      c.box.addEventListener('click', () => poke(c));
+      c.box.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); poke(c); } });
     });
 
-    /* ---------- Blob shadows ---------- */
-    const shTex = (() => {
-      const c = document.createElement('canvas'); c.width = c.height = 64;
-      const x = c.getContext('2d'), g = x.createRadialGradient(32, 32, 0, 32, 32, 32);
-      g.addColorStop(0, 'rgba(15,23,42,.42)'); g.addColorStop(1, 'rgba(15,23,42,0)');
-      x.fillStyle = g; x.fillRect(0, 0, 64, 64); return new THREE.CanvasTexture(c);
-    })();
-    [uul, bot, gear].forEach(c => {
-      c.sh = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 1.5), new THREE.MeshBasicMaterial({ map: shTex, transparent: true, depthWrite: false }));
-      c.sh.rotation.x = -Math.PI / 2; c.sh.position.y = .01; scene.add(c.sh);
-    });
+    if (reduce) return;
 
-    /* ---------- Layout / resize ---------- */
-    function layout() {
-      const w = stage.clientWidth, h = stage.clientHeight;
-      if (!w || !h) return;
-      renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
-      renderer.setSize(w, h, false);
-      cam.aspect = w / h; cam.updateProjectionMatrix();
-      const visW = 2 * Math.tan(15 * Math.PI / 180) * CAM_D * cam.aspect;
-      const sp = visW / 3, s = clamp(sp / 3.1, .5, 1.1);
-      [bot, uul, gear].forEach((c, i) => { c.x = (i - 1) * sp; c.s = s; c.g.position.x = c.x; });
-      draw();
-    }
-    if (window.ResizeObserver) new ResizeObserver(layout).observe(stage); else addEventListener('resize', layout);
+    // Staggered initial greetings
+    setTimeout(() => say(uul), 800);
+    setTimeout(() => say(bot), 1500);
+    setTimeout(() => say(gear), 2200);
 
-    /* ---------- Input: gaze in 3D + click raycast ---------- */
-    const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), tgt = new THREE.Vector3(0, 2, 3);
-    let lastInput = -1e9, hoverDirty = false, hx = 0, hy = 0;
-    function toNdc(cx, cy) { const r = cv.getBoundingClientRect(); ndc.set((cx - r.left) / r.width * 2 - 1, -((cy - r.top) / r.height) * 2 + 1); }
-    function aim(cx, cy) {
-      toNdc(cx, cy); ray.setFromCamera(ndc, cam);
-      const t = (3 - ray.ray.origin.z) / ray.ray.direction.z;
-      ray.ray.at(clamp(t, 0, 30), tgt); tgt.x = clamp(tgt.x, -9, 9); tgt.y = clamp(tgt.y, -2, 8);
-      lastInput = performance.now();
-    }
-    addEventListener('pointermove', e => { aim(e.clientX, e.clientY); if (e.pointerType === 'mouse') { hoverDirty = true; hx = e.clientX; hy = e.clientY; } }, { passive: true });
-    addEventListener('touchmove', e => { const t = e.touches[0]; if (t) aim(t.clientX, t.clientY); }, { passive: true });
-    function pick(cx, cy) {
-      toNdc(cx, cy); ray.setFromCamera(ndc, cam);
-      const hs = ray.intersectObjects(hits.map(c => c.hit), false)[0];
-      return hs ? hits.find(c => c.hit === hs.object) : null;
-    }
-    cv.addEventListener('pointerdown', e => { aim(e.clientX, e.clientY); const c = pick(e.clientX, e.clientY); if (c) onPoke(c.key); }, { passive: true });
-    let scrollVel = 0, lastY = scrollY;
-    addEventListener('scroll', () => { const y = scrollY; scrollVel += clamp(y - lastY, -80, 80); lastY = y; }, { passive: true });
-
-    /* ---------- Click reactions ---------- */
-    const cOf = { uul, bot, gear };
-    function bump(c, up, squash) { c.hv = up; c.sq = -squash; c.sqv = 0; c.mood = 1; }
-    function clickGear(now) {
-      const g = gear;
-      g.omega = Math.min(g.omega + 9 + Math.max(0, g.omega) * .15, 34);
-      g.glow = 1; g.ringT = 0; g.sparkT = 0;
-      g.tick += .035;
-      for (let i = 0; i < g.sparkV.length; i += 3) {
-        const a = Math.random() * 6.283, v = 1.6 + Math.random() * 2.4;
-        g.sparkV[i] = Math.cos(a) * v; g.sparkV[i + 1] = Math.sin(a) * v + .6; g.sparkV[i + 2] = .6 + Math.random() * 1.6;
-        const p = g.sparks.geometry.attributes.position.array; p[i] = Math.cos(a) * .9; p[i + 1] = Math.sin(a) * .9; p[i + 2] = .3;
-      }
-      g.clicks = g.clicks.filter(t => now - t < 1700); g.clicks.push(now);
-      if (g.clicks.length >= 5 && g.dizzy <= 0) {
-        g.dizzy = 2.4; g.clicks.length = 0; say('gear', 'Pusing… 🌀 ampun!');
-        if (navigator.vibrate) { try { navigator.vibrate([12, 40, 12]); } catch (e) {} }
-        return true;
-      }
-      if (navigator.vibrate) { try { navigator.vibrate(8); } catch (e) {} }
-      return false;
-    }
-    onPoke = key => {
-      const c = cOf[key];
-      if (key === 'gear') {
-        bump(c, 5.5, .34);
-        if (!clickGear(performance.now())) say(key, nextLine(key));
-        return;
-      }
-      say(key, nextLine(key));
-      bump(c, key === 'uul' ? 6 : 6.8, .2);
-      if (key === 'uul') uul.wave = 1.6; else { bot.ant.v = 14; bot.pulse = 1; }
-      if (navigator.vibrate) { try { navigator.vibrate(8); } catch (e) {} }
-    };
-
-    /* ---------- Per-frame update ---------- */
-    const _s = x => Math.sin(x);
-    function phys(c, dt) {
-      c.hv -= 30 * dt; c.hop += c.hv * dt;
-      if (c.hop < 0) {
-        const imp = -c.hv; c.hop = 0;
-        if (imp > 2.5) { c.hv = imp * .22; c.sq = -Math.min(.26, imp * .035); c.sqv = 0; } else c.hv = 0;
-      }
-      c.sqv += (-170 * c.sq - 9 * c.sqv) * dt; c.sq += c.sqv * dt;
-      c.mood *= Math.exp(-dt * 2);
-      const sq = clamp(c.sq, -.4, .3);
-      c.g.position.y = c.hop * c.s;
-      c.g.scale.set(c.s * (1 - sq * .5), c.s * (1 + sq), c.s * (1 - sq * .5));
-      c.sh.position.x = c.x;
-      c.sh.scale.setScalar(c.s * clamp(1 - c.hop * .1, .5, 1));
-      c.sh.material.opacity = clamp(1 - c.hop * .12, .4, 1);
-    }
-    function gaze(c, headY, dt, idleT) {
-      let dx = tgt.x - c.x, dy = tgt.y - headY * c.s;
-      if (idleT) { dx = _s(idleT * .7 + c.x) * 4 - c.x * .2; dy = _s(idleT * .9 + c.x) * .8; }
-      const yaw = Math.atan2(dx, 4), pitch = Math.atan2(dy, 4), f = 1 - Math.exp(-dt * 9);
-      c.yaw += (yaw - c.yaw) * f; c.pitch += (pitch - c.pitch) * f;
-    }
-    function pupil(p, c, max, ex, ey) {
-      p.position.x = clamp(c.yaw * 1.1, -.7, .7) * max + (ex || 0);
-      p.position.y = clamp(c.pitch * 1.4, -.5, .5) * max + (ey || 0);
-    }
-    let bl = 1, blAt = -1, nextBl = 1.5;
-    let prev = performance.now(), t = 0;
-    function update(dt) {
-      t += dt;
-      const idleT = performance.now() - lastInput > 3500 ? t : 0;
-      const sv = reduce ? 0 : clamp(scrollVel, -80, 80); scrollVel *= Math.exp(-dt * 8);
-      [uul, bot, gear].forEach(c => phys(c, dt));
-      if (sv) { uul.hv += Math.abs(sv) * .01; gear.omega += sv * .05 * dt * 60 * .08; }
-
-      // blink (shared timing)
-      if (blAt < 0 && t > nextBl) blAt = t;
-      if (blAt >= 0) { const p = (t - blAt) / .16; if (p >= 1) { bl = 1; blAt = -1; nextBl = t + 1.8 + Math.random() * 3; } else bl = 1 - Math.sin(p * Math.PI) * .92; }
-      blink.forEach(e => { e.scale.y = bl; });
-
-      // ---- Uul ----
-      gaze(uul, 2.3, dt, idleT);
-      uul.head.rotation.y = clamp(uul.yaw * .55, -.5, .5);
-      uul.head.rotation.x = clamp(-uul.pitch * .5, -.3, .3) + uul.sq * -.4;
-      uul.head.rotation.z = clamp(-uul.yaw * .12, -.15, .15);
-      uul.pupils.forEach(p => pupil(p, uul, .035));
-      uul.hair.rotation.x = -uul.hv * .01 - uul.mood * .03; uul.hair.position.y = uul.mood * .02 + clamp(uul.hv * .004, -.03, .03);
-      uul.torso.scale.y = .82 * (1 + _s(t * 2.2) * .018);
-      uul.brows.position.y = uul.mood * .05;
-      uul.smile.scale.set(1 + uul.mood * .15, 1 + uul.mood * .6, 1);
-      uul.wave = Math.max(0, (uul.wave || 0) - dt);
-      const w = uul.wave > 0 ? Math.min(1, uul.wave * 3) : 0;
-      uul.arms[0].rotation.z = -.16 + _s(t * 1.8) * .03;
-      uul.arms[1].rotation.z = .16 - _s(t * 1.8 + 1) * .03 + w * (2.35 + _s(t * 16) * .35);
-      uul.g.rotation.y = clamp(uul.yaw * .18, -.2, .2);
-
-      // ---- Bot ----
-      gaze(bot, 2.5, dt, idleT);
-      bot.float.position.y = 1.35 + _s(t * 1.9) * .08;
-      bot.float.rotation.y = clamp(bot.yaw * .4, -.4, .4);
-      bot.float.rotation.x = clamp(-bot.pitch * .12, -.1, .1) + bot.sq * -.2;
-      bot.eyes.forEach(e => { e.position.x = (e.position.x < 0 ? -.22 : .22) + clamp(bot.yaw, -.7, .7) * .08; e.position.y = .66 + clamp(bot.pitch, -.5, .5) * .06; });
-      bot.ant.v = (bot.ant.v || 0) + (-90 * (bot.ant.a || 0) - 5 * bot.ant.v) * dt; bot.ant.a = (bot.ant.a || 0) + bot.ant.v * dt * .06;
-      bot.ant.rotation.z = clamp(bot.ant.a, -.6, .6) + clamp(bot.yaw * .1, -.1, .1);
-      const sw = _s(t * 2.4) * .06 + bot.mood * 1.1;
-      bot.arms[0].rotation.z = -.2 - sw; bot.arms[1].rotation.z = .2 + sw;
-      bot.mouth.scale.set(1 + bot.mood * .25, 1 + bot.mood * .8, 1);
-      bot.dots.forEach((d, i) => { d.position.y = -.12 + Math.max(0, _s(t * 5 - i * .9)) * .05; });
-      bot.pulse = Math.max(0, (bot.pulse || 0) - dt * 1.2);
-      bot.waves.forEach((m, i) => { m.material.opacity = .22 + Math.max(0, _s(t * (3 + bot.pulse * 5) - i * 1.1)) * .78; });
-      bot.wifi.rotation.y = _s(t * .9) * .25; bot.wifi.position.y = 2.0 + _s(t * 2.3) * .05 + bot.mood * .1;
-
-      // ---- Gear: inertia, meshing mini gear, glow/ring/sparks, dizzy ----
-      const g = gear;
-      gaze(g, 1.8, dt, idleT);
-      const idleW = reduce ? .2 : .7 + clamp(sv * .02, -2, 2);
-      g.omega += (idleW - g.omega) * (1 - Math.exp(-dt * (Math.abs(g.omega) > 6 ? .9 : 1.5)));
-      g.ang += g.omega * dt;
-      g.big.rotation.z = g.ang;
-      g.mini.rotation.z = g.PHI + Math.PI + Math.PI / g.N2 - (g.N1 / g.N2) * (g.ang - g.PHI);
-      const step = Math.PI * 2 / g.N1;
-      g.tickAcc += g.omega * dt;
-      if (Math.abs(g.tickAcc) > step) { g.tickAcc %= step; if (g.omega > 5) g.tick = Math.min(.05, g.tick + .012); }
-      g.tick *= Math.exp(-dt * 12);
-      g.glow *= Math.exp(-dt * 3);
-      const gl = g.glow + clamp((Math.abs(g.omega) - 6) / 40, 0, .3);
-      gold_(g, gl);
-      g.light.intensity = gl * 5;
-      g.ringT = Math.min(1, g.ringT + dt * 1.7);
-      const rp = g.ringT;
-      g.ring.scale.setScalar(1 + rp * 1.15); g.ring.material.opacity = rp < 1 ? (1 - rp) * .85 : 0;
-      g.sparkT = Math.min(1, g.sparkT + dt * 1.6);
-      if (g.sparkT < 1) {
-        const p = g.sparks.geometry.attributes.position.array;
-        for (let i = 0; i < p.length; i += 3) { g.sparkV[i + 1] -= 5 * dt; p[i] += g.sparkV[i] * dt; p[i + 1] += g.sparkV[i + 1] * dt; p[i + 2] += g.sparkV[i + 2] * dt; }
-        g.sparks.geometry.attributes.position.needsUpdate = true;
-      }
-      g.sparks.material.opacity = g.sparkT < 1 ? 1 - g.sparkT : 0;
-      const wasDizzy = g.dizzy > 0;
-      g.dizzy = Math.max(0, g.dizzy - dt);
-      const dz = Math.min(1, g.dizzy * 2);
-      g.tilt.rotation.y = clamp(g.yaw * .35, -.35, .35) + _s(t * 9) * .18 * dz;
-      g.tilt.rotation.x = clamp(-g.pitch * .25, -.25, .25) + _s(t * 7.3) * .14 * dz + g.tick * 2;
-      g.root.rotation.z = _s(t * 6) * .12 * dz + _s(t * 40) * g.tick * .6;
-      g.face.rotation.z = _s(t * 1.4) * .04 + _s(t * 11) * .2 * dz;
-      g.pupils.forEach(p => { pupil(p, g, .05, Math.cos(t * 14) * .045 * dz, Math.sin(t * 14) * .045 * dz); });
-      g.mouth.scale.set(1 - dz * .3 + g.mood * .25, 1 + g.mood * .8 + dz * .9, 1);
-      if (wasDizzy && g.dizzy <= 0) say('gear', nextLine('gear'));
-    }
-    function gold_(g, v) { g.big.material.emissiveIntensity = v * .75; g.face.children[0].material.emissiveIntensity = v * .6; }
-
-    function draw() { renderer.render(scene, cam); }
-
-    /* ---------- Loop: only runs while stage is on screen ---------- */
-    let vis = true, running = false;
+    /* ---------- Main rAF Animation Loop ---------- */
+    let prev = performance.now(), t0 = prev;
     function frame(now) {
-      if (!vis) { running = false; return; }
       const dt = Math.min(.05, (now - prev) / 1000) || .016; prev = now;
-      update(dt);
-      if (hoverDirty) { hoverDirty = false; cv.style.cursor = pick(hx, hy) ? 'pointer' : 'default'; }
-      draw();
+      const ms = now - t0;
+      const idle = now - lastInput > 3500;
+
+      // Scroll impulse -> springs & velocity
+      const dy = pendingDy; pendingDy = 0;
+      scrollVel += (dy / dt - scrollVel) * Math.min(1, dt * 10);
+      const sv = clamp(dy, -60, 60);
+      if (sv) {
+        uul.sp.v += -sv * 9; bot.sp.v += -sv * 13; gear.sp.v += -sv * 7;
+        uul.tilt.v += sv * 1.6; bot.tilt.v += -sv * 2.2;
+        bot.ant.v += sv * 12;
+        uul.hair.v += -sv * 7;
+      }
+
+      // Gear rotation: idle spin + scroll-driven
+      const targetOmega = 24 + scrollVel * .42;
+      gear.omega += (targetOmega - gear.omega) * Math.min(1, dt * 3.2);
+      gear.angle = (gear.angle + gear.omega * dt) % 360;
+      gear.dizzy += ((Math.abs(gear.omega) > 420 ? 1 : 0) - gear.dizzy) * Math.min(1, dt * 4);
+
+      for (let i = 0; i < chars.length; i++) {
+        const c = chars[i];
+        if (!c.box) continue;
+        const svgEl = c.box.querySelector('svg');
+        if (!svgEl) continue;
+        const r = svgEl.getBoundingClientRect();
+
+        // Gaze target
+        let tx = mx, ty = my;
+        if (idle) {
+          tx = innerWidth * (.5 + Math.sin(ms / 1900 + i * 2) * .35);
+          ty = innerHeight * (.35 + Math.cos(ms / 2300 + i) * .2);
+        }
+        const ex = r.left + r.width * c.ax, ey = r.top + r.height * c.ay;
+        const vx = tx - ex, vy = ty - ey, dist = Math.hypot(vx, vy) || 1;
+        const k = clamp(dist / 160, 0, 1);
+        let gx = vx / dist * c.r * k, gy = vy / dist * c.r * k;
+        if (c === gear && gear.dizzy > .02) {
+          const a = ms / 90;
+          gx += Math.cos(a) * c.r * .8 * gear.dizzy; gy += Math.sin(a) * c.r * .8 * gear.dizzy;
+        }
+        const f = 1 - Math.exp(-dt * 16);
+        c.look.x += (gx - c.look.x) * f; c.look.y += (gy - c.look.y) * f;
+        const lx = c.look.x.toFixed(2), ly = c.look.y.toFixed(2);
+        if (c.eyes[0]) c.eyes[0].setAttribute('transform', 'translate(' + lx + ' ' + ly + ')');
+        if (c.eyes[1]) c.eyes[1].setAttribute('transform', 'translate(' + lx + ' ' + ly + ')');
+
+        // Blink
+        if (c.blinkAt < 0 && ms > c.nextBlink) c.blinkAt = ms;
+        if (c.blinkAt >= 0) {
+          const p = (ms - c.blinkAt) / 150;
+          if (p >= 1) { c.blink = 1; c.blinkAt = -1; c.nextBlink = ms + 1800 + Math.random() * 3200; }
+          else c.blink = 1 - Math.sin(p * Math.PI) * .92;
+        }
+        if (c.lids[0]) c.lids[0].setAttribute('transform', 'scale(1 ' + c.blink.toFixed(3) + ')');
+        if (c.lids[1]) c.lids[1].setAttribute('transform', 'scale(1 ' + c.blink.toFixed(3) + ')');
+
+        // Head tilt toward pointer
+        const lean = clamp(vx / 420, -1, 1);
+        stepSpring(c.tilt, dt);
+        stepSpring(c.sp, dt);
+        c.mood *= Math.exp(-dt * 2.2);
+
+        // Character bounce + squash/stretch
+        const y = clamp(c.sp.x, -60, 40);
+        const sq = clamp(-y / 260, -.14, .18);
+        c.box.style.transform = 'translate3d(0,' + y.toFixed(2) + 'px,0) scale(' + (1 - sq * .6).toFixed(3) + ',' + (1 + sq).toFixed(3) + ')';
+        if (c.shadow) {
+          c.shadow.style.transform = 'scale(' + clamp(1 + y / 160, .6, 1.1).toFixed(3) + ')';
+          c.shadow.style.opacity = clamp(1 + y / 120, .4, 1).toFixed(2);
+        }
+        c._lean = lean;
+      }
+
+      // Uul specific springs
+      stepSpring(uul.hair, dt);
+      const breathe = Math.sin(ms / 900) * .012;
+      const headRot = uul._lean * 7 + uul.tilt.x * .35;
+      const nod = clamp(uul.sp.x * .08, -4, 4);
+      const uHead = $('uulHead');
+      const uHair = $('uulHair');
+      const uBody = $('uulBody');
+      const uBrows = $('uulBrows');
+      const uMouth = $('uulMouth');
+
+      if (uHead) uHead.setAttribute('transform', 'translate(' + (uul._lean * 3).toFixed(2) + ' ' + nod.toFixed(2) + ') rotate(' + headRot.toFixed(2) + ' 100 160)');
+      if (uHair) uHair.setAttribute('transform', 'rotate(' + clamp(uul.hair.x * .25 - uul._lean * 2, -9, 9).toFixed(2) + ' 100 80) translate(0 ' + (-clamp(uul.hair.x * .06, -2, 3) + uul.mood * -2).toFixed(2) + ')');
+      if (uBody) uBody.setAttribute('transform', 'scale(' + (1 + breathe).toFixed(4) + ' ' + (1 + breathe * 1.6).toFixed(4) + ')');
+      if (uBrows) uBrows.setAttribute('transform', 'translate(0 ' + (-uul.mood * 5).toFixed(2) + ')');
+      if (uMouth) uMouth.setAttribute('transform', 'scale(' + (1 + uul.mood * .12).toFixed(3) + ' ' + (1 + uul.mood * .25).toFixed(3) + ')');
+
+      // Bot specific springs
+      stepSpring(bot.ant, dt);
+      const bAnt = $('botAnt');
+      const bArmL = $('botArmL');
+      const bArmR = $('botArmR');
+      const bBody = $('botBody');
+      const bMouth = $('botMouth');
+      const bTyping = $('botTyping');
+
+      if (bAnt) bAnt.setAttribute('transform', 'rotate(' + clamp(bot.ant.x * .5 + bot._lean * 6, -28, 28).toFixed(2) + ' 80 52)');
+      const arm = clamp(bot.sp.x * .9, -30, 30) + Math.sin(ms / 420) * 3;
+      if (bArmL) bArmL.setAttribute('transform', 'rotate(' + (-arm - bot.mood * 40).toFixed(2) + ' 26 112)');
+      if (bArmR) bArmR.setAttribute('transform', 'rotate(' + (arm + bot.mood * 40).toFixed(2) + ' 134 112)');
+      if (bBody) bBody.setAttribute('transform', 'rotate(' + clamp(bot.tilt.x * .3 + bot._lean * 3, -8, 8).toFixed(2) + ' 80 165)');
+      if (bMouth) bMouth.setAttribute('transform', 'scale(' + (1 + bot.mood * .35).toFixed(3) + ' ' + (1 + bot.mood * .9).toFixed(3) + ')');
+      if (bTyping) bTyping.setAttribute('transform', 'translate(0 ' + (Math.sin(ms / 500) * 2 - bot.mood * 3).toFixed(2) + ')');
+
+      // Gear specific springs
+      const gBody = $('gearBody');
+      const gFace = $('gearFace');
+      const gMouth = $('gearMouth');
+      if (gBody) gBody.setAttribute('transform', 'rotate(' + gear.angle.toFixed(2) + ' 80 80)');
+      if (gFace) gFace.setAttribute('transform', 'rotate(' + clamp(gear._lean * 5 + Math.sin(ms / 700) * 1.5, -9, 9).toFixed(2) + ' 80 80)');
+      if (gMouth) gMouth.setAttribute('transform', 'scale(' + (1 - gear.dizzy * .25 + gear.mood * .3).toFixed(3) + ' ' + (1 + gear.mood * .6 + gear.dizzy * .5).toFixed(3) + ')');
+
       requestAnimationFrame(frame);
     }
-    function start() { if (running) return; running = true; prev = performance.now(); requestAnimationFrame(frame); }
-    if (window.IntersectionObserver) new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis) start(); }).observe(stage);
-    layout();
-    start();
+    requestAnimationFrame(frame);
   })();
   </script>
 
-  </body>
+  <script>
+
+    function setChat(type) {
+      const u = document.getElementById('cUser');
+      const b = document.getElementById('cBot');
+      if (type === 'promo') {
+        u.innerText = '"Halo kak, susu oatmilk 1L ada yang promo hari ini?"';
+        b.innerText = '"Halo Kak! Ada dong, Oatside Barista 1L lagi promo Rp 38.500 dari Rp 45.000. Stok sisa 12 pcs di gudang. Mau dibungkus kak? Bisa kirim instan sekarang 😊"';
+      } else if (type === 'stok') {
+        u.innerText = '"Kak mau ambil kemeja linen warna sage size XL 3 pcs ada?"';
+        b.innerText = '"Siap kak! Setelah dicek di sistem, Linen Sage size XL ready 5 pcs. Total Rp 375.000 (diskon ambil 3 pcs). Mau dikirim ke alamat mana kak?"';
+      } else if (type === 'ongkir') {
+        u.innerText = '"Kalau kirim ke Buah Batu Bandung ongkirnya berapa ya?"';
+        b.innerText = '"Untuk pengiriman ke Buah Batu, Bandung: Regular JNE Rp 11.000 (1-2 hari sampai) atau SiCepat Gokil Rp 9.000 kak. Mau pakai yang mana?"';
+      }
+    }
+  </script>
+</body>
 </html>
